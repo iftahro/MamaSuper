@@ -5,7 +5,7 @@ using MamaSuper.Common.Models;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Adds new costumers to the supermarket line 
+    /// Adds a new costumer to the supermarket line 
     /// </summary>
     public class CostumersLineAdder : IMenuOption
     {

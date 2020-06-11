@@ -6,7 +6,7 @@ using MamaSuper.Common.Models;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Prints all the costumers in line
+    /// Prints all costumers in line
     /// </summary>
     public class CostumersLinePrinter : IMenuOption
     {

@@ -12,22 +12,22 @@ namespace MamaSuper.Console
         static void Main(string[] args)
         {
             Line<Costumer> costumersLine = new Line<Costumer>();
-            ILineService<Costumer> a = new CostumersLineService(costumersLine);
-            
+            ILineService<Costumer> costumersLineService = new CostumersLineService(costumersLine);
+
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CostumersLineAdder("Add new costumer to the line", a),
-                    new CostumersLineMover("Move costumers into the supermarket", a),
-                    new CostumersLinePrinter("Print all costumers in line", a)
+                    new CostumersLineAdder("Add new costumer to the line", costumersLineService),
+                    new CostumersLineMover("Move costumers into the supermarket", costumersLineService),
+                    new CostumersLinePrinter("Print all costumers in line", costumersLineService)
                 });
-            
+
             var mainMenu = new NumericMenu("Main Menu",
                 new List<IMenuOption>
                 {
                     lineManagementMenu
                 });
-            
+
             mainMenu.Action();
         }
     }

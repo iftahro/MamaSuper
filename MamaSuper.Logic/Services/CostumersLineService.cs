@@ -6,6 +6,9 @@ using MamaSuper.Logic.Interfaces;
 
 namespace MamaSuper.Logic.Services
 {
+    /// <summary>
+    /// <inheritdoc cref="ILineService{T}"/>
+    /// </summary>
     public class CostumersLineService : ILineService<Costumer>
     {
         private readonly Line<Costumer> _costumersLine;

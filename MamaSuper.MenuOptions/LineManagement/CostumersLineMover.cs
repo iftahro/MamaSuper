@@ -7,7 +7,7 @@ using MamaSuper.Common.Models;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Moves costumers into the supermarket
+    /// Moves costumers out of the supermarket line
     /// </summary>
     public class CostumersLineMover : IMenuOption
     {
