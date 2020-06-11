@@ -3,7 +3,7 @@
 namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Generic queue-based super line 
+    /// Generic queue-based line 
     /// </summary>
     public class Line<T>
     {
@@ -17,7 +17,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Adds item T to the line tail
         /// </summary>
-        public void AddToLine(T item)
+        public void AddItemToLine(T item)
         {
             _queue.Enqueue(item);
         }
@@ -25,7 +25,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Removes item T from the line head
         /// </summary>
-        public T RemoveFromLine()
+        public T RemoveItemFromLine()
         {
             return _queue.Dequeue();
         }
@@ -33,7 +33,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Returns all the line items
         /// </summary>
-        public IEnumerable<T> GetQueueItems()
+        public IEnumerable<T> GetLineItems()
         {
             foreach (T item in _queue)
             {

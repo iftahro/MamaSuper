@@ -1,5 +1,8 @@
 ﻿namespace MamaSuper.Logic.Interfaces
 {
+    /// <summary>
+    /// Represents an option in a menu
+    /// </summary>
     public interface IMenuOption
     {
         /// <summary>
@@ -8,7 +11,7 @@
         string Description { get; }
 
         /// <summary>
-        /// The action the action preforms
+        /// The action the option preforms
         /// </summary>
         void Action();
     }
