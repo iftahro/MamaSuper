@@ -32,5 +32,10 @@
             HasMask = hasMask;
             ShouldIsolate = shouldIsolate;
         }
+
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }

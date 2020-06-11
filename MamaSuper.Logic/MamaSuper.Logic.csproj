@@ -5,4 +5,8 @@
         <RootNamespace>MamaSuper.Logic</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\MamaSuper.Common\MamaSuper.Common.csproj" />
+    </ItemGroup>
+
 </Project>

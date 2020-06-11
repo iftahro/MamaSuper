@@ -35,6 +35,7 @@ namespace MamaSuper.MenuOptions.Menus
         /// </summary>
         private void _displayMenuOptions()
         {
+            Console.WriteLine(Description);
             for (int i = 0; i < _menuOptions.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {_menuOptions[i].Description}");
@@ -49,6 +50,7 @@ namespace MamaSuper.MenuOptions.Menus
         private void _handleUserInput()
         {
             string userInput = Console.ReadLine();
+            Console.WriteLine();
             if (!int.TryParse(userInput, out int userChoice))
             {
                 Console.WriteLine($"'{userInput}' is not a valid number!\nTry again..\n");
@@ -61,7 +63,7 @@ namespace MamaSuper.MenuOptions.Menus
                 Console.WriteLine($"{userChoice} is out of choice range!\nTry again..\n");
                 return;
             }
-            
+
             if (userChoice == maxOptions)
             {
                 _running = false;

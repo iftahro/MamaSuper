@@ -3,6 +3,7 @@ using MamaSuper.Logic.Interfaces;
 using MamaSuper.MenuOptions.LineManagement;
 using MamaSuper.MenuOptions.Menus;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Services;
 
 namespace MamaSuper.Console
 {
@@ -11,13 +12,14 @@ namespace MamaSuper.Console
         static void Main(string[] args)
         {
             Line<Costumer> costumersLine = new Line<Costumer>();
+            ILineService<Costumer> a = new CostumersLineService(costumersLine);
             
-            var lineManagementMenu = new NumericMenu("Line Management",
+            var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CostumerAdder("Add a costumer", costumersLine),
-                    new CostumerMover("Move costumers into the super", costumersLine),
-                    new CostumerPrinter("Print all costumers", costumersLine)
+                    new CostumersLineAdder("Add new costumer to the line", a),
+                    new CostumersLineMover("Move costumers into the supermarket", a),
+                    new CostumersLinePrinter("Print all costumers in line", a)
                 });
             
             var mainMenu = new NumericMenu("Main Menu",
