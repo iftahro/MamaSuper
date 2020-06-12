@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.ExtensionMethods;
 using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.LineManagement
@@ -25,12 +26,12 @@ namespace MamaSuper.MenuOptions.LineManagement
             int currentLineCount = _customersLineService.CountLineItems();
             if (currentLineCount == 0)
             {
-                Console.WriteLine("There are no customer in line!");
+                Console.WriteLine("There are no customer in line!\n");
                 return;
             }
 
-            var customersToMoveInput = ConsoleUtils.GetInputAfterOutput("Enter the amount of customer to move:");
-            if (!handleCustomersToMove(customersToMoveInput, currentLineCount, out int customersToMove)) return;
+            string customersToMoveInput = ConsoleUtils.GetInputAfterOutput("Enter the amount of customer to move:");
+            if (!validateCustomersToMove(customersToMoveInput, currentLineCount, out int customersToMove)) return;
 
             IEnumerable<Customer> movedCostumers = _customersLineService.MoveOutItems(customersToMove);
             foreach (Customer movedCostumer in movedCostumers)
@@ -39,23 +40,19 @@ namespace MamaSuper.MenuOptions.LineManagement
             }
         }
 
-        private bool handleCustomersToMove(string customersToMoveInput, int currentLineCount, out int customersToMove)
+        private bool validateCustomersToMove(string customersToMoveInput, int currentLineCount, out int customersToMove)
         {
-            if (!int.TryParse(customersToMoveInput, out customersToMove))
-            {
-                Console.WriteLine($"'{customersToMoveInput}' is not a valid number!");
-                return false;
-            }
+            if (!customersToMoveInput.TryParseToInt(out customersToMove)) return false;
 
             if (customersToMove < 0)
             {
-                Console.WriteLine($"'{customersToMove}' is not a valid customers amount!");
+                Console.WriteLine($"'{customersToMove}' is not a valid customers amount!\n");
                 return false;
             }
 
             if (customersToMove > currentLineCount)
             {
-                Console.WriteLine($"There are only {currentLineCount} customers in the line!");
+                Console.WriteLine($"There are only {currentLineCount} customers in the line!\n");
                 return false;
             }
 

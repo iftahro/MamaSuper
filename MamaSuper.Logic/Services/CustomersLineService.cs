@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
 using MamaSuper.Logic.ExtensionMethods;
@@ -7,7 +6,7 @@ using MamaSuper.Logic.ExtensionMethods;
 namespace MamaSuper.Logic.Services
 {
     /// <summary>
-    /// <inheritdoc cref="ILineService{T}"/>
+    /// This line service <inheritdoc cref="ILineService{T}"/> handles the costumers line
     /// </summary>
     public class CustomersLineService : ILineService<Customer>
     {
