@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
+using MamaSuper.Logic.ExtensionMethods;
 
 namespace MamaSuper.MenuOptions.Menus
 {
@@ -52,11 +53,7 @@ namespace MamaSuper.MenuOptions.Menus
         {
             string userInput = Console.ReadLine();
             Console.WriteLine();
-            if (!int.TryParse(userInput, out int userChoice))
-            {
-                Console.WriteLine($"'{userInput}' is not a valid number!\nTry again..\n");
-                return;
-            }
+            if (!userInput.TryParseToInt(out int userChoice)) return;
 
             int maxOptions = _menuOptions.Count + 1;
             if (userChoice > maxOptions || userChoice <= 0)
@@ -65,12 +62,14 @@ namespace MamaSuper.MenuOptions.Menus
                 return;
             }
 
+            // Checks if the user choice is the last menu option (the exit option)
             if (userChoice == maxOptions)
             {
                 _running = false;
                 return;
             }
 
+            // Preforms the action of the chosen menu option
             _menuOptions[userChoice - 1].Action();
         }
     }
