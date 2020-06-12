@@ -18,7 +18,7 @@ namespace MamaSuper.Logic.Services
             _customersLine = customersLine;
         }
 
-        public bool TryAddItemToLine(Customer customer, out string failingMessage)
+        public bool TryAddItem(Customer customer, out string failingMessage)
         {
             if (!customer.IsPermittedToEnter(out failingMessage))
                 return false;
@@ -27,18 +27,23 @@ namespace MamaSuper.Logic.Services
             return true;
         }
 
-        public IList<Customer> GetLineItems()
+        public IEnumerable<Customer> GetLineItems()
         {
-            return _customersLine.GetLineItems().ToList();
+            return _customersLine.GetLineItems();
         }
 
-        public IEnumerable<Customer> MoveItemsFromLine(int count)
+        public IEnumerable<Customer> MoveOutItems(int count)
         {
-            for (int i = 0; i < _customersLine.CountLineItems(); i++)
+            for (int i = 0; i < count; i++)
             {
                 Customer customer = _customersLine.RemoveLineItem();
                 yield return customer;
             }
+        }
+
+        public int CountLineItems()
+        {
+            return _customersLine.CountLineItems();
         }
     }
 }
