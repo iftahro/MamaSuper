@@ -1,6 +1,7 @@
 ﻿using System;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
@@ -9,32 +10,30 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// </summary>
     public class CustomersLineAdder : IMenuOption
     {
-        public string Description { get; }
-
         private readonly ILineService<Customer> _customersLineService;
 
-        public CustomersLineAdder(string description, ILineService<Customer> customersLineService)
+        public CustomersLineAdder(ILineService<Customer> customersLineService)
         {
-            Description = description;
             _customersLineService = customersLineService;
         }
 
+        public string Description { get; } = "Add new customer to the line";
+
         public void Action()
         {
-            Console.WriteLine("Enter customer name:");
-            string customerName = Console.ReadLine();
+            string customerName = ConsoleUtils.GetInputAfterOutput("Enter customer name:");
 
-            Console.WriteLine($"Enter {customerName}'s body temp (c° degree):");
-            if (!_tryGetCostumerTemp(out int bodyTemperature)) return;
+            string bodyTempInput = ConsoleUtils.GetInputAfterOutput($"Enter {customerName}'s body temp (c° degree):");
+            if (!handleNumericInput(bodyTempInput, out int bodyTemperature)) return;
 
-            Console.WriteLine($"Does {customerName} wear mask? (true/false)");
-            if (!_tryGetBool(out bool maskOn)) return;
+            string hasMaskInput = ConsoleUtils.GetInputAfterOutput($"Does {customerName} wear mask? (true/false)");
+            if (!handleBooleanInput(hasMaskInput, out bool maskOn)) return;
 
-            Console.WriteLine($"Does {customerName} should be isolated? (true/false)");
-            if (!_tryGetBool(out bool shouldIsolate)) return;
+            string shouldIsolateInput = ConsoleUtils.GetInputAfterOutput($"Does {customerName} should be isolated? (true/false)");
+            if (!handleBooleanInput(shouldIsolateInput, out bool shouldIsolate)) return;
 
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
-            if (!_customersLineService.TryAddItemToLine(customer, out string failingMessage))
+            if (!_customersLineService.TryAddItem(customer, out string failingMessage))
             {
                 Console.WriteLine($"\nFailed adding customer to line. Failing reason:\n{failingMessage}\n");
                 return;
@@ -43,24 +42,22 @@ namespace MamaSuper.MenuOptions.LineManagement
             Console.WriteLine($"Added customer '{customer}' to the line!\n");
         }
 
-        private bool _tryGetCostumerTemp(out int bodyTemperature)
+        private bool handleNumericInput(string numericInput, out int bodyTemperature)
         {
-            string userInput = Console.ReadLine();
-            if (!int.TryParse(userInput, out bodyTemperature))
+            if (!int.TryParse(numericInput, out bodyTemperature))
             {
-                Console.WriteLine($"'{userInput}' is not a valid body temperature!\nTry again..\n");
+                Console.WriteLine($"'{numericInput}' is not a valid number!\nTry again..\n");
                 return false;
             }
 
             return true;
         }
 
-        private bool _tryGetBool(out bool answer)
+        private bool handleBooleanInput(string booleanInput, out bool answer)
         {
-            string userInput = Console.ReadLine();
-            if (!bool.TryParse(userInput, out answer))
+            if (!bool.TryParse(booleanInput, out answer))
             {
-                Console.WriteLine($"'{userInput}' is not true/false!\nTry again..\n");
+                Console.WriteLine($"'{booleanInput}' is not true/false!\nTry again..\n");
                 return false;
             }
 

@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
@@ -11,44 +11,52 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// </summary>
     public class CustomersLineMover : IMenuOption
     {
-        public string Description { get; }
-
         private readonly ILineService<Customer> _customersLineService;
 
-        public CustomersLineMover(string description, ILineService<Customer> customersLineService)
+        public CustomersLineMover(ILineService<Customer> customersLineService)
         {
-            Description = description;
             _customersLineService = customersLineService;
         }
 
+        public string Description { get; } = "Move customers into the supermarket";
+
         public void Action()
         {
-            int lineCustomers = _customersLineService.GetLineItems().Count;
-            if (lineCustomers == 0)
+            int currentLineCount = _customersLineService.CountLineItems();
+            if (currentLineCount == 0)
             {
                 Console.WriteLine("There are no customer in line!");
                 return;
             }
 
-            Console.WriteLine("Enter the amount of customer to move:");
-            if (!_tryGetCostumersToMove(lineCustomers, out int customersToMove)) return;
+            var customersToMoveInput = ConsoleUtils.GetInputAfterOutput("Enter the amount of customer to move:");
+            if (!handleCustomersToMove(customersToMoveInput, currentLineCount, out int customersToMove)) return;
 
-            IEnumerable<Customer> movedCostumers = _customersLineService.MoveItemsFromLine(customersToMove);
-            movedCostumers.ToList().ForEach(costumer => Console.WriteLine($"Moved {costumer} from line to supermarket"));
+            IEnumerable<Customer> movedCostumers = _customersLineService.MoveOutItems(customersToMove);
+            foreach (Customer movedCostumer in movedCostumers)
+            {
+                Console.WriteLine($"Moved {movedCostumer} from line to supermarket");
+            }
         }
 
-        private bool _tryGetCostumersToMove(int lineCustomers, out int customersToMove)
+        private bool handleCustomersToMove(string customersToMoveInput, int currentLineCount, out int customersToMove)
         {
-            string userInput = Console.ReadLine();
-            if (!int.TryParse(userInput, out customersToMove))
+            if (!int.TryParse(customersToMoveInput, out customersToMove))
             {
-                Console.WriteLine($"'{userInput}' is not a valid number!");
+                Console.WriteLine($"'{customersToMoveInput}' is not a valid number!");
                 return false;
             }
 
-            if (customersToMove > lineCustomers)
+            if (customersToMove < 0)
             {
-                Console.WriteLine($"There are only {lineCustomers} customer in line!");
+                Console.WriteLine($"'{customersToMove}' is not a valid customers amount!");
+                return false;
+            }
+
+            if (customersToMove > currentLineCount)
+            {
+                Console.WriteLine($"There are only {currentLineCount} customers in the line!");
+                return false;
             }
 
             return true;
