@@ -11,17 +11,17 @@ namespace MamaSuper.Console
     {
         static void Main(string[] args)
         {
-            Line<Customer> customersLine = new Line<Customer>();
-            ILineService<Customer> customersLineService = new CustomersLineService(customersLine);
-
+            // Line management menu for the supermarket customer line management
+            ILineService<Customer> customersLineService = new CustomersLineService(new Line<Customer>());
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CustomersLineAdder("Add new customer to the line", customersLineService),
-                    new CustomersLineMover("Move customers into the supermarket", customersLineService),
-                    new CustomersLinePrinter("Print all customers in line", customersLineService)
+                    new CustomersLineAdder(customersLineService),
+                    new CustomersLineMover(customersLineService),
+                    new CustomersLinePrinter(customersLineService)
                 });
 
+            // The main menu that contains all the management menus
             var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption> { lineManagementMenu });
 
             mainMenu.Action();
