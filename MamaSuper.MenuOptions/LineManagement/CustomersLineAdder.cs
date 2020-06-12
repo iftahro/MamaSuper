@@ -1,46 +1,46 @@
 ﻿using System;
-using MamaSuper.Logic.Interfaces;
+using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Adds a new costumer to the supermarket line 
+    /// Adds a new customer to the supermarket line 
     /// </summary>
-    public class CostumersLineAdder : IMenuOption
+    public class CustomersLineAdder : IMenuOption
     {
         public string Description { get; }
 
-        private readonly ILineService<Costumer> _costumersLineService;
+        private readonly ILineService<Customer> _customersLineService;
 
-        public CostumersLineAdder(string description, ILineService<Costumer> costumersLineService)
+        public CustomersLineAdder(string description, ILineService<Customer> customersLineService)
         {
             Description = description;
-            _costumersLineService = costumersLineService;
+            _customersLineService = customersLineService;
         }
 
         public void Action()
         {
-            Console.WriteLine("Enter costumer name:");
-            string costumerName = Console.ReadLine();
+            Console.WriteLine("Enter customer name:");
+            string customerName = Console.ReadLine();
 
-            Console.WriteLine($"Enter {costumerName}'s body temp (c° degree):");
+            Console.WriteLine($"Enter {customerName}'s body temp (c° degree):");
             if (!_tryGetCostumerTemp(out int bodyTemperature)) return;
 
-            Console.WriteLine($"Does {costumerName} wear mask? (true/false)");
+            Console.WriteLine($"Does {customerName} wear mask? (true/false)");
             if (!_tryGetBool(out bool maskOn)) return;
 
-            Console.WriteLine($"Does {costumerName} should be isolated? (true/false)");
+            Console.WriteLine($"Does {customerName} should be isolated? (true/false)");
             if (!_tryGetBool(out bool shouldIsolate)) return;
 
-            var costumer = new Costumer(costumerName, bodyTemperature, maskOn, shouldIsolate);
-            if (!_costumersLineService.TryAddItemToLine(costumer, out string failingMessage))
+            var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
+            if (!_customersLineService.TryAddItemToLine(customer, out string failingMessage))
             {
-                Console.WriteLine($"\nFailed adding costumer to line. Failing reason:\n{failingMessage}\n");
+                Console.WriteLine($"\nFailed adding customer to line. Failing reason:\n{failingMessage}\n");
                 return;
             }
 
-            Console.WriteLine($"Added costumer '{costumer}' to the line!\n");
+            Console.WriteLine($"Added customer '{customer}' to the line!\n");
         }
 
         private bool _tryGetCostumerTemp(out int bodyTemperature)

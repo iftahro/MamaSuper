@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MamaSuper.Logic.Interfaces;
+using MamaSuper.Common.Interfaces;
 
 namespace MamaSuper.MenuOptions.Menus
 {
@@ -58,7 +58,7 @@ namespace MamaSuper.MenuOptions.Menus
             }
 
             int maxOptions = _menuOptions.Count + 1;
-            if (userChoice > maxOptions)
+            if (userChoice > maxOptions || userChoice <= 0)
             {
                 Console.WriteLine($"{userChoice} is out of choice range!\nTry again..\n");
                 return;

@@ -1,39 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using MamaSuper.Logic.Interfaces;
+using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Moves costumers out of the supermarket line
+    /// Moves customer out of the supermarket line
     /// </summary>
-    public class CostumersLineMover : IMenuOption
+    public class CustomersLineMover : IMenuOption
     {
         public string Description { get; }
 
-        private readonly ILineService<Costumer> _costumersLineService;
+        private readonly ILineService<Customer> _customersLineService;
 
-        public CostumersLineMover(string description, ILineService<Costumer> costumersLineService)
+        public CustomersLineMover(string description, ILineService<Customer> customersLineService)
         {
             Description = description;
-            _costumersLineService = costumersLineService;
+            _customersLineService = customersLineService;
         }
 
         public void Action()
         {
-            int lineCustomers = _costumersLineService.GetLineItems().Count;
+            int lineCustomers = _customersLineService.GetLineItems().Count;
             if (lineCustomers == 0)
             {
-                Console.WriteLine("There are no costumers in line!");
+                Console.WriteLine("There are no customer in line!");
                 return;
             }
 
-            Console.WriteLine("Enter the amount of costumers to move:");
+            Console.WriteLine("Enter the amount of customer to move:");
             if (!_tryGetCostumersToMove(lineCustomers, out int customersToMove)) return;
 
-            IEnumerable<Costumer> movedCostumers = _costumersLineService.MoveItemsFromLine(customersToMove);
+            IEnumerable<Customer> movedCostumers = _customersLineService.MoveItemsFromLine(customersToMove);
             movedCostumers.ToList().ForEach(costumer => Console.WriteLine($"Moved {costumer} from line to supermarket"));
         }
 
@@ -48,7 +48,7 @@ namespace MamaSuper.MenuOptions.LineManagement
 
             if (customersToMove > lineCustomers)
             {
-                Console.WriteLine($"There are only {lineCustomers} costumers in line!");
+                Console.WriteLine($"There are only {lineCustomers} customer in line!");
             }
 
             return true;

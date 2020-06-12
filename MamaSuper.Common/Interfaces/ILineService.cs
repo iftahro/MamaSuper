@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MamaSuper.Logic.Interfaces
+namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
     /// Generic line service for comfortable line management

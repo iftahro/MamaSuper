@@ -1,4 +1,4 @@
-﻿namespace MamaSuper.Logic.Interfaces
+﻿namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
     /// Represents an option in a menu
@@ -8,7 +8,7 @@
         /// <summary>
         /// The option description for the choice menu 
         /// </summary>
-        string Description { get; }
+        string Description { get;}
 
         /// <summary>
         /// The action the option preforms

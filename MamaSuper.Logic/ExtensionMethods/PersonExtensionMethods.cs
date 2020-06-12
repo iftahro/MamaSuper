@@ -1,6 +1,6 @@
 ﻿using MamaSuper.Common.Models;
 
-namespace MamaSuper.Common.ExtensionMethods
+namespace MamaSuper.Logic.ExtensionMethods
 {
     /// <summary>
     /// Person model extension methods 

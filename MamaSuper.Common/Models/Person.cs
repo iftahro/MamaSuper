@@ -8,18 +8,18 @@
         /// <summary>
         /// The person's name
         /// </summary>
-        public string Name { get; set; }
-        
+        public string Name { get; }
+
         /// <summary>
         /// The person's body temperature in c° degree 
         /// </summary>
-        public int BodyTemperature { get; set; }
-        
+        public int BodyTemperature { get; }
+
         /// <summary>
         /// Is the person wear mask
         /// </summary>
-        public bool HasMask { get; set; }
-        
+        public bool HasMask { get; }
+
         /// <summary>
         /// Is the person should be isolated duo to coronavirus
         /// </summary>
