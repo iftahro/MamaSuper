@@ -1,12 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamaSuper.Console", "MamaSuper.Console\MamaSuper.Console.csproj", "{D0D1FBE5-DCA1-496C-9F91-8EC26B2F61DC}"
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29911.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamaSuper.Console", "MamaSuper.Console\MamaSuper.Console.csproj", "{D0D1FBE5-DCA1-496C-9F91-8EC26B2F61DC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamaSuper.Logic", "MamaSuper.Logic\MamaSuper.Logic.csproj", "{7714D7DB-C6F6-404E-83B1-AC3E6E799ED5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamaSuper.Logic", "MamaSuper.Logic\MamaSuper.Logic.csproj", "{7714D7DB-C6F6-404E-83B1-AC3E6E799ED5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamaSuper.Common", "MamaSuper.Common\MamaSuper.Common.csproj", "{0BB2A002-7786-48E2-9067-D72427B7CDD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamaSuper.Common", "MamaSuper.Common\MamaSuper.Common.csproj", "{0BB2A002-7786-48E2-9067-D72427B7CDD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MamaSuper.MenuOptions", "MamaSuper.MenuOptions\MamaSuper.MenuOptions.csproj", "{7374C22B-0003-469C-ACB9-A760AC3CEFED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MamaSuper.MenuOptions", "MamaSuper.MenuOptions\MamaSuper.MenuOptions.csproj", "{7374C22B-0003-469C-ACB9-A760AC3CEFED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,5 +33,11 @@ Global
 		{7374C22B-0003-469C-ACB9-A760AC3CEFED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7374C22B-0003-469C-ACB9-A760AC3CEFED}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7374C22B-0003-469C-ACB9-A760AC3CEFED}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A0120CD4-9CE7-4680-B0CF-0737D10FCDAC}
 	EndGlobalSection
 EndGlobal

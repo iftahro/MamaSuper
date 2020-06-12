@@ -1,12 +1,14 @@
 ﻿using MamaSuper.Common.Models;
 
-namespace MamaSuper.Common.ExtensionMethods
+namespace MamaSuper.Logic.ExtensionMethods
 {
     /// <summary>
     /// Person model extension methods 
     /// </summary>
     public static class PersonExtensionMethods
     {
+        private const int MAX_BODY_TEMPERATURE = 38;
+
         /// <summary>
         /// Checks if the person is permitted to enter public places (coronavirus wise)
         /// </summary>
@@ -18,7 +20,7 @@ namespace MamaSuper.Common.ExtensionMethods
             bool isPermitted = true;
             prohibitionReason = string.Empty;
 
-            if (person.BodyTemperature > 38)
+            if (person.BodyTemperature > MAX_BODY_TEMPERATURE)
             {
                 prohibitionReason += $"Body temperature ({person.BodyTemperature}°) should be under 38 degrees. ";
                 isPermitted = false;

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MamaSuper.Logic.Interfaces
+namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
     /// Generic line service for comfortable line management
@@ -14,18 +14,23 @@ namespace MamaSuper.Logic.Interfaces
         /// <param name="item">The item to be added</param>
         /// <param name="failingMessage">Failing message if the adding action failed</param>
         /// <returns>Is the adding action was successful</returns>
-        bool TryAddItemToLine(T item, out string failingMessage);
-
-        /// <summary>
-        /// Gets all line items
-        /// </summary>
-        IList<T> GetLineItems();
+        bool TryAddItem(T item, out string failingMessage);
 
         /// <summary>
         /// Moves out items from line
         /// </summary>
         /// <param name="count">The number of items to move out</param>
         /// <returns>The items that where moved out</returns>
-        IEnumerable<T> MoveItemsFromLine(int count);
+        IEnumerable<T> MoveOutItems(int count);
+
+        /// <summary>
+        /// Gets all line items
+        /// </summary>
+        IEnumerable<T> GetLineItems();
+
+        /// <summary>
+        /// Counts the line items
+        /// </summary>
+        int CountLineItems();
     }
 }

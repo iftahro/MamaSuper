@@ -17,7 +17,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Adds item T to the line tail
         /// </summary>
-        public void AddItemToLine(T item)
+        public void AddLineItem(T item)
         {
             _queue.Enqueue(item);
         }
@@ -25,7 +25,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Removes item T from the line head
         /// </summary>
-        public T RemoveItemFromLine()
+        public T RemoveLineItem()
         {
             return _queue.Dequeue();
         }
@@ -44,7 +44,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Counts the items in the line
         /// </summary>
-        public int CountLine()
+        public int CountLineItems()
         {
             return _queue.Count;
         }

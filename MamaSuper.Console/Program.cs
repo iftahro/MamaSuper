@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using MamaSuper.Logic.Interfaces;
+using MamaSuper.Common.Interfaces;
 using MamaSuper.MenuOptions.LineManagement;
 using MamaSuper.MenuOptions.Menus;
 using MamaSuper.Common.Models;
@@ -11,22 +11,18 @@ namespace MamaSuper.Console
     {
         static void Main(string[] args)
         {
-            Line<Costumer> costumersLine = new Line<Costumer>();
-            ILineService<Costumer> costumersLineService = new CostumersLineService(costumersLine);
-
+            // Line management menu for the supermarket customer line management
+            ILineService<Customer> customersLineService = new CustomersLineService(new Line<Customer>());
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CostumersLineAdder("Add new costumer to the line", costumersLineService),
-                    new CostumersLineMover("Move costumers into the supermarket", costumersLineService),
-                    new CostumersLinePrinter("Print all costumers in line", costumersLineService)
+                    new CustomersLineAdder(customersLineService),
+                    new CustomersLineMover(customersLineService),
+                    new CustomersLinePrinter(customersLineService)
                 });
 
-            var mainMenu = new NumericMenu("Main Menu",
-                new List<IMenuOption>
-                {
-                    lineManagementMenu
-                });
+            // The main menu that contains all the management menus
+            var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption> { lineManagementMenu });
 
             mainMenu.Action();
         }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MamaSuper.Logic.Interfaces;
+using MamaSuper.Common.Interfaces;
 
 namespace MamaSuper.MenuOptions.Menus
 {
@@ -10,9 +10,8 @@ namespace MamaSuper.MenuOptions.Menus
     /// </summary>
     public class NumericMenu : IMenuOption
     {
-        public string Description { get; }
-        private readonly IList<IMenuOption> _menuOptions;
         private bool _running;
+        private readonly IList<IMenuOption> _menuOptions;
 
         public NumericMenu(string description, IList<IMenuOption> menuOptions)
         {
@@ -20,20 +19,22 @@ namespace MamaSuper.MenuOptions.Menus
             _menuOptions = menuOptions;
         }
 
+        public string Description { get; }
+
         public void Action()
         {
             _running = true;
             while (_running)
             {
-                _displayMenuOptions();
-                _handleUserInput();
+                displayMenuOptions();
+                handleUserInput();
             }
         }
 
         /// <summary>
         /// Displays the menu options by ascending numbers
         /// </summary>
-        private void _displayMenuOptions()
+        private void displayMenuOptions()
         {
             Console.WriteLine(Description);
             for (int i = 0; i < _menuOptions.Count; i++)
@@ -47,7 +48,7 @@ namespace MamaSuper.MenuOptions.Menus
         /// <summary>
         /// Handles the user input to activate the chosen action
         /// </summary>
-        private void _handleUserInput()
+        private void handleUserInput()
         {
             string userInput = Console.ReadLine();
             Console.WriteLine();
@@ -58,7 +59,7 @@ namespace MamaSuper.MenuOptions.Menus
             }
 
             int maxOptions = _menuOptions.Count + 1;
-            if (userChoice > maxOptions)
+            if (userChoice > maxOptions || userChoice <= 0)
             {
                 Console.WriteLine($"{userChoice} is out of choice range!\nTry again..\n");
                 return;
