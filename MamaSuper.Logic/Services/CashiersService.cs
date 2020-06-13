@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.Logic.Services
 {
     public class CashiersService : ICashiersService
     {
-        public CashiersService(List<Cashier> cashiers, ICustomersLineService customersLineService)
+        private readonly Dictionary<string, int> _supermarketProducts;
+
+        public CashiersService(List<Cashier> cashiers, ICustomersLineService customersLineService, 
+            Dictionary<string, int> supermarketProducts)
         {
             Cashiers = cashiers;
+            _supermarketProducts = supermarketProducts;
             customersLineService.CustomerMovedOut += onCustomerEnters;
         }
 
@@ -40,7 +45,7 @@ namespace MamaSuper.Logic.Services
             for (int i = 0; i < Cashiers.Count; i++)
             {
                 if (i == Cashiers.Count - 1) break;
-                if (Cashiers[i].PassedCustomers.Count > Cashiers[i + 1].PassedCustomers.Count)
+                if (Cashiers[i].Registers.Count > Cashiers[i + 1].Registers.Count)
                 {
                     return Cashiers[i + 1];
                 }
@@ -56,12 +61,10 @@ namespace MamaSuper.Logic.Services
         /// <param name="cashier">The cashier to be registered</param>
         private void registerOnCashier(Customer customer, Cashier cashier)
         {
-            if (!cashier.IsOpen())
-            {
-                cashier.DateOpened = DateTime.Now;
-            }
+            if (!cashier.IsOpen()) cashier.DateOpened = DateTime.Now;
 
-            cashier.PassedCustomers.Add(customer);
+            List<Product> randomProducts = ProductUtils.GenerateRandomProducts(_supermarketProducts);
+            cashier.Registers[customer] = randomProducts;
         }
     }
 }

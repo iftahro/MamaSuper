@@ -9,33 +9,30 @@ namespace MamaSuper.MenuOptions.CashiersManagement
     /// <summary>
     /// Isolates retrospectively all customers of a specific cashier
     /// </summary>
-    public class CashierIsolationOption : IMenuOption
+    public class IsolationOption : IMenuOption
     {
         private readonly ICashiersService _cashiersService;
-        private readonly PassedCustomersOption _passedCustomersOption;
 
-        public CashierIsolationOption(ICashiersService cashiersService, PassedCustomersOption passedCustomersOption)
+        public IsolationOption(ICashiersService cashiersService)
         {
             _cashiersService = cashiersService;
-            _passedCustomersOption = passedCustomersOption;
         }
 
-        public string Description { get; } = "Isolate cashier customers retrospectively";
+        public string Description { get; } = "Isolate cashier retrospectively";
 
         public void Action()
         {
-            _passedCustomersOption.Action();
-            string userInput = ConsoleUtils.GetInputAfterOutput("Choose a cashier:");
+            string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier (1-{_cashiersService.Cashiers.Count}):");
             if (!validateUserChoice(userInput, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
             if (!chosenCashier.IsOpen())
             {
-                Console.WriteLine("No customers passed in that cashier yet!\n");
+                Console.WriteLine("This cashier is not open yet!\n");
                 return;
             }
 
-            foreach (Customer customer in chosenCashier.PassedCustomers)
+            foreach (Customer customer in chosenCashier.Registers.Keys)
             {
                 customer.ShouldIsolate = true;
             }

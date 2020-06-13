@@ -11,27 +11,27 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// Customers who passed in the cashier
         /// </summary>
-        public List<Customer> PassedCustomers { get; set; }
+        public Dictionary<Customer, List<Product>> Registers { get; set; }
 
         /// <summary>
         /// The date on which the cashier opened
         /// </summary>
         public DateTime DateOpened { get; set; }
 
-        public Cashier(List<Customer> passedCustomers = null, DateTime dateOpened = default)
+        public Cashier(Dictionary<Customer, List<Product>> registers = null, DateTime dateOpened = default)
         {
-            PassedCustomers = passedCustomers ?? new List<Customer>();
+            Registers = registers ?? new Dictionary<Customer, List<Product>>();
             DateOpened = dateOpened;
         }
 
         public bool IsOpen()
         {
-            return PassedCustomers.Count > 0;
+            return Registers.Count > 0;
         }
 
         public override string ToString()
         {
-            return string.Join(",", PassedCustomers);
+            return string.Join(",", Registers.Keys);
         }
     }
 }
