@@ -39,8 +39,8 @@ namespace MamaSuper.Logic.Services
             for (int i = 0; i < count; i++)
             {
                 Customer customer = _customersLine.RemoveLineItem();
-                CustomerMovedOut?.Invoke(this, customer);
                 yield return customer;
+                CustomerMovedOut?.Invoke(this, customer);
             }
         }
 

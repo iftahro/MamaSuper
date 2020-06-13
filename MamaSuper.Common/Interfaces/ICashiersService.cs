@@ -7,7 +7,7 @@ namespace MamaSuper.Common.Interfaces
 {
     public interface ICashiersService
     {
-        List<Cashier> Cashiers { get; set; }
+        List<Cashier> Cashiers { get; }
 
         IEnumerable<Cashier> GetAllCashiers();
     }

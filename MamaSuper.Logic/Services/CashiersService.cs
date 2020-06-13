@@ -7,8 +7,9 @@ namespace MamaSuper.Logic.Services
 {
     public class CashiersService : ICashiersService
     {
-        public CashiersService(ICustomersLineService customersLineService)
+        public CashiersService(List<Cashier> cashiers, ICustomersLineService customersLineService)
         {
+            Cashiers = cashiers;
             customersLineService.CustomerMovedOut += onCustomerEnters;
         }
 
@@ -22,21 +23,37 @@ namespace MamaSuper.Logic.Services
             }
         }
 
+        /// <summary>
+        /// This method is called when a customer enters into the supermarket
+        /// </summary>
         private void onCustomerEnters(object sender, Customer customer)
+        {
+            Cashier emptiestCashier = getEmptiestCashier();
+            registerOnCashier(customer, emptiestCashier);
+        }
+
+        /// <summary>
+        /// Returns the emptiest supermarket cashier
+        /// </summary>
+        private Cashier getEmptiestCashier()
         {
             for (int i = 0; i < Cashiers.Count; i++)
             {
                 if (i == Cashiers.Count - 1) break;
                 if (Cashiers[i].PassedCustomers.Count > Cashiers[i + 1].PassedCustomers.Count)
                 {
-                    registerOnCashier(customer, Cashiers[i + 1]);
-                    return;
+                    return Cashiers[i + 1];
                 }
             }
 
-            registerOnCashier(customer, Cashiers[0]);
+            return Cashiers[0];
         }
 
+        /// <summary>
+        /// Customer registration in a cashier 
+        /// </summary>
+        /// <param name="customer">The customer who registered</param>
+        /// <param name="cashier">The cashier to be registered</param>
         private void registerOnCashier(Customer customer, Cashier cashier)
         {
             if (cashier.PassedCustomers.Count == 0)
