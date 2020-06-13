@@ -6,9 +6,9 @@ using MamaSuper.Logic.ExtensionMethods;
 namespace MamaSuper.Logic.Services
 {
     /// <summary>
-    /// This line service <inheritdoc cref="ILineService{T}"/> handles the costumers line
+    /// <inheritdoc cref="ICustomersLineService"/>
     /// </summary>
-    public class CustomersLineService : ILineService<Customer>
+    public class CustomersLineService : ICustomersLineService
     {
         private readonly Line<Customer> _customersLine;
 
@@ -17,7 +17,7 @@ namespace MamaSuper.Logic.Services
             _customersLine = customersLine;
         }
 
-        public bool TryAddItem(Customer customer, out string failingMessage)
+        public bool TryAddCustomer(Customer customer, out string failingMessage)
         {
             if (!customer.IsPermittedToEnter(out failingMessage))
                 return false;
@@ -26,12 +26,12 @@ namespace MamaSuper.Logic.Services
             return true;
         }
 
-        public IEnumerable<Customer> GetLineItems()
+        public IEnumerable<Customer> GetLineCustomers()
         {
             return _customersLine.GetLineItems();
         }
 
-        public IEnumerable<Customer> MoveOutItems(int count)
+        public IEnumerable<Customer> MoveOutCustomers(int count)
         {
             for (int i = 0; i < count; i++)
             {
@@ -40,7 +40,7 @@ namespace MamaSuper.Logic.Services
             }
         }
 
-        public int CountLineItems()
+        public int CountLineCustomers()
         {
             return _customersLine.CountLineItems();
         }

@@ -11,9 +11,9 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// </summary>
     public class CustomersLineAdder : IMenuOption
     {
-        private readonly ILineService<Customer> _customersLineService;
+        private readonly ICustomersLineService _customersLineService;
 
-        public CustomersLineAdder(ILineService<Customer> customersLineService)
+        public CustomersLineAdder(ICustomersLineService customersLineService)
         {
             _customersLineService = customersLineService;
         }
@@ -34,7 +34,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             if (!shouldIsolateInput.TryParseToBool(out bool shouldIsolate)) return;
 
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
-            if (!_customersLineService.TryAddItem(customer, out string failingMessage))
+            if (!_customersLineService.TryAddCustomer(customer, out string failingMessage))
             {
                 Console.WriteLine($"\nFailed adding customer to line. Failing reason:\n{failingMessage}\n");
                 return;

@@ -2,9 +2,6 @@
 
 namespace MamaSuper.Logic.ExtensionMethods
 {
-    /// <summary>
-    /// Person model extension methods 
-    /// </summary>
     public static class PersonExtensionMethods
     {
         private const int MAX_BODY_TEMPERATURE = 38;
