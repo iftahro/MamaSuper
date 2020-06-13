@@ -4,6 +4,7 @@ using MamaSuper.MenuOptions.LineManagement;
 using MamaSuper.MenuOptions.Menus;
 using MamaSuper.Common.Models;
 using MamaSuper.Logic.Services;
+using MamaSuper.MenuOptions.CashiersManagement;
 
 namespace MamaSuper.Console
 {
@@ -16,13 +17,26 @@ namespace MamaSuper.Console
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CustomersLineAdder(customersLineService),
-                    new CustomersLineMover(customersLineService),
-                    new CustomersLinePrinter(customersLineService)
+                    new CustomerAdderOption(customersLineService),
+                    new CustomersMoverOption(customersLineService),
+                    new LineDetailsOption(customersLineService)
+                });
+
+            // Cashiers management menu for the supermarket cashiers
+            var cashiersService = new CashiersService(new List<Cashier>
+                {new Cashier(), new Cashier(), new Cashier()}, customersLineService);
+            var passedCustomersOption = new PassedCustomersOption(cashiersService);
+            var cashiersManagementMenu = new NumericMenu("Cashiers Management Menu",
+                new List<IMenuOption>
+                {
+                    passedCustomersOption,
+                    new OpeningDateOption(cashiersService),
+                    new CashierIsolationOption(cashiersService, passedCustomersOption)
                 });
 
             // The main menu that contains all the management menus
-            var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption> { lineManagementMenu });
+            var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption>
+                {lineManagementMenu, cashiersManagementMenu});
 
             mainMenu.Action();
         }
