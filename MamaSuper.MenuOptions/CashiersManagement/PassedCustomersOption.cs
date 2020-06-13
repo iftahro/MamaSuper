@@ -28,11 +28,11 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 Cashier cashier = cashiers[i];
                 if (cashier.PassedCustomers.Count == 0)
                 {
-                    Console.WriteLine($"No.{i + 1}: No customers passed yet\n");
+                    Console.WriteLine($"No.{i + 1}: No customers has passed yet\n");
                     continue;
                 }
 
-                Console.WriteLine($"No.{i + 1}: {string.Join(",", cashier.PassedCustomers)}\n");
+                Console.WriteLine($"No.{i + 1}: {cashier}\n");
             }
         }
     }

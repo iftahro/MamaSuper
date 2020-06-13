@@ -40,8 +40,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 customer.ShouldIsolate = true;
             }
 
-            Console.WriteLine($"Cashier No.{userChoice} customers ({string.Join(",", chosenCashier.PassedCustomers)})" +
-                              $" are now isolated\n");
+            Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) are now isolated\n");
         }
 
         private bool validateUserChoice(string userInput, out int userChoice)

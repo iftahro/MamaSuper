@@ -23,5 +23,10 @@ namespace MamaSuper.Common.Models
             PassedCustomers = passedCustomers ?? new List<Customer>();
             DateOpened = dateOpened;
         }
+
+        public override string ToString()
+        {
+            return string.Join(",", PassedCustomers);
+        }
     }
 }
