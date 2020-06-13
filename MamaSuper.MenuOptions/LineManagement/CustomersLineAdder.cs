@@ -36,7 +36,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
             if (!_customersLineService.TryAddCustomer(customer, out string failingMessage))
             {
-                Console.WriteLine($"\nFailed adding customer to line. Failing reason:\n{failingMessage}\n");
+                Console.WriteLine($"\nFailed adding customer '{customerName}' to line. Failing reason:\n{failingMessage}\n");
                 return;
             }
 

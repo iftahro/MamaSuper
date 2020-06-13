@@ -22,7 +22,7 @@ namespace MamaSuper.MenuOptions.LineManagement
         {
             if (_customersLineService.CountLineCustomers() == 0)
             {
-                Console.WriteLine("There are no customers in line");
+                Console.WriteLine("There are no customers in line\n");
                 return;
             }
 
