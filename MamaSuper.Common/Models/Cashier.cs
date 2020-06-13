@@ -17,5 +17,11 @@ namespace MamaSuper.Common.Models
         /// The date on which the cashier opened
         /// </summary>
         public DateTime DateOpened { get; set; }
+
+        public Cashier(List<Customer> passedCustomers = null, DateTime dateOpened = default)
+        {
+            PassedCustomers = passedCustomers ?? new List<Customer>();
+            DateOpened = dateOpened;
+        }
     }
 }
