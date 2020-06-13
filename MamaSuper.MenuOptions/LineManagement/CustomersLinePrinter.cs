@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using MamaSuper.Common.Interfaces;
-using MamaSuper.Common.Models;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
@@ -10,9 +9,9 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// </summary>
     public class CustomersLinePrinter : IMenuOption
     {
-        private readonly ILineService<Customer> _customersLineService;
+        private readonly ICustomersLineService _customersLineService;
 
-        public CustomersLinePrinter(ILineService<Customer> customersLineService)
+        public CustomersLinePrinter(ICustomersLineService customersLineService)
         {
             _customersLineService = customersLineService;
         }
@@ -21,14 +20,14 @@ namespace MamaSuper.MenuOptions.LineManagement
 
         public void Action()
         {
-            if (_customersLineService.CountLineItems() == 0)
+            if (_customersLineService.CountLineCustomers() == 0)
             {
-                Console.WriteLine("There are no customers in line");
+                Console.WriteLine("There are no customers in line\n");
                 return;
             }
 
             Console.WriteLine("Current customers in line:");
-            _customersLineService.GetLineItems().ToList().ForEach(Console.WriteLine);
+            _customersLineService.GetLineCustomers().ToList().ForEach(Console.WriteLine);
         }
     }
 }

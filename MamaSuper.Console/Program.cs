@@ -12,7 +12,7 @@ namespace MamaSuper.Console
         static void Main(string[] args)
         {
             // Line management menu for the supermarket customers line
-            ILineService<Customer> customersLineService = new CustomersLineService(new Line<Customer>());
+            ICustomersLineService customersLineService = new CustomersLineService(new Line<Customer>());
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
