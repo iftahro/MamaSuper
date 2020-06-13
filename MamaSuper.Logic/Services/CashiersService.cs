@@ -56,7 +56,7 @@ namespace MamaSuper.Logic.Services
         /// <param name="cashier">The cashier to be registered</param>
         private void registerOnCashier(Customer customer, Cashier cashier)
         {
-            if (cashier.PassedCustomers.Count == 0)
+            if (!cashier.IsOpen())
             {
                 cashier.DateOpened = DateTime.Now;
             }

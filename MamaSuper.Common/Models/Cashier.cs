@@ -24,6 +24,11 @@ namespace MamaSuper.Common.Models
             DateOpened = dateOpened;
         }
 
+        public bool IsOpen()
+        {
+            return PassedCustomers.Count > 0;
+        }
+
         public override string ToString()
         {
             return string.Join(",", PassedCustomers);

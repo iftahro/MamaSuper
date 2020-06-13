@@ -26,7 +26,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];
-                if (cashier.PassedCustomers.Count == 0)
+                if (!cashier.IsOpen())
                 {
                     Console.WriteLine($"No.{i + 1}: No customers has passed yet\n");
                     continue;

@@ -29,7 +29,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             if (!validateUserChoice(userInput, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
-            if (chosenCashier.PassedCustomers.Count == 0)
+            if (!chosenCashier.IsOpen())
             {
                 Console.WriteLine("No customers passed in that cashier yet!\n");
                 return;
