@@ -8,13 +8,13 @@ using MamaSuper.Logic.Utils;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Moves customer out of the supermarket line
+    /// Moves customers out of the supermarket line
     /// </summary>
-    public class CustomersLineMover : IMenuOption
+    public class CustomersMoverOption : IMenuOption
     {
         private readonly ICustomersLineService _customersLineService;
 
-        public CustomersLineMover(ICustomersLineService customersLineService)
+        public CustomersMoverOption(ICustomersLineService customersLineService)
         {
             _customersLineService = customersLineService;
         }
@@ -36,7 +36,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             IEnumerable<Customer> movedCostumers = _customersLineService.MoveOutCustomers(customersToMove);
             foreach (Customer movedCostumer in movedCostumers)
             {
-                Console.WriteLine($"Moved {movedCostumer} from line to supermarket");
+                Console.WriteLine($"Moved {movedCostumer} from line into the supermarket\n");
             }
         }
 

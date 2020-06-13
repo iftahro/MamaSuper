@@ -5,13 +5,13 @@ using MamaSuper.Common.Interfaces;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Prints all customers in line
+    /// Prints the line details (current customers in line)
     /// </summary>
-    public class CustomersLinePrinter : IMenuOption
+    public class LineDetailsOption : IMenuOption
     {
         private readonly ICustomersLineService _customersLineService;
 
-        public CustomersLinePrinter(ICustomersLineService customersLineService)
+        public LineDetailsOption(ICustomersLineService customersLineService)
         {
             _customersLineService = customersLineService;
         }

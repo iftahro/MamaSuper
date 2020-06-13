@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MamaSuper.Common.Models;
 
 namespace MamaSuper.Common.Interfaces
@@ -8,6 +9,11 @@ namespace MamaSuper.Common.Interfaces
     /// </summary>
     public interface ICustomersLineService
     {
+        /// <summary>
+        /// This event will be invoked when a customer move out from the line
+        /// </summary>
+        event EventHandler<Customer> CustomerMovedOut;
+        
         /// <summary>
         /// Tries adding an customer to the line
         /// </summary>

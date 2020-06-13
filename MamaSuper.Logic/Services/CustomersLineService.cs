@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
 using MamaSuper.Logic.ExtensionMethods;
@@ -16,6 +17,8 @@ namespace MamaSuper.Logic.Services
         {
             _customersLine = customersLine;
         }
+
+        public event EventHandler<Customer> CustomerMovedOut;
 
         public bool TryAddCustomer(Customer customer, out string failingMessage)
         {
@@ -37,6 +40,7 @@ namespace MamaSuper.Logic.Services
             {
                 Customer customer = _customersLine.RemoveLineItem();
                 yield return customer;
+                CustomerMovedOut?.Invoke(this, customer);
             }
         }
 

@@ -7,13 +7,13 @@ using MamaSuper.Logic.Utils;
 namespace MamaSuper.MenuOptions.LineManagement
 {
     /// <summary>
-    /// Adds a new customer to the supermarket line 
+    /// Adds new customers to the supermarket line 
     /// </summary>
-    public class CustomersLineAdder : IMenuOption
+    public class CustomerAdderOption : IMenuOption
     {
         private readonly ICustomersLineService _customersLineService;
 
-        public CustomersLineAdder(ICustomersLineService customersLineService)
+        public CustomerAdderOption(ICustomersLineService customersLineService)
         {
             _customersLineService = customersLineService;
         }
@@ -30,13 +30,15 @@ namespace MamaSuper.MenuOptions.LineManagement
             string hasMaskInput = ConsoleUtils.GetInputAfterOutput($"Does {customerName} wear mask? (true/false)");
             if (!hasMaskInput.TryParseToBool(out bool maskOn)) return;
 
-            string shouldIsolateInput = ConsoleUtils.GetInputAfterOutput($"Does {customerName} should be isolated? (true/false)");
+            string shouldIsolateInput =
+                ConsoleUtils.GetInputAfterOutput($"Does {customerName} should be isolated? (true/false)");
             if (!shouldIsolateInput.TryParseToBool(out bool shouldIsolate)) return;
 
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
             if (!_customersLineService.TryAddCustomer(customer, out string failingMessage))
             {
-                Console.WriteLine($"\nFailed adding customer '{customerName}' to line. Failing reason:\n{failingMessage}\n");
+                Console.WriteLine(
+                    $"\nFailed adding customer '{customerName}' to line. Failing reason:\n{failingMessage}\n");
                 return;
             }
 
