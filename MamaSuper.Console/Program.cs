@@ -30,8 +30,8 @@ namespace MamaSuper.Console
             var cashiersManagementMenu = new NumericMenu("Cashiers Management Menu",
                 new List<IMenuOption>
                 {
-                    new CashierRegistersOption(cashiersService),
-                    new CashierOpeningDateOption(cashiersService),
+                    new CashiersRegistersOption(cashiersService),
+                    new CashiersOpeningDateOption(cashiersService),
                     new CashierIsolationOption(cashiersService)
                 });
 
