@@ -17,7 +17,7 @@ namespace MamaSuper.Common.Interfaces
         /// <summary>
         /// The supermarket customers line
         /// </summary>
-        Line<Customer> CustomersLine { get; }
+        SupermarketLine<Customer> CustomersLine { get; }
 
         /// <summary>
         /// Moves out customers from line

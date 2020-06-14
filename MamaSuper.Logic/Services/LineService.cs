@@ -10,7 +10,7 @@ namespace MamaSuper.Logic.Services
     /// </summary>
     public class LineService : ILineService
     {
-        public LineService(Line<Customer> customersLine)
+        public LineService(SupermarketLine<Customer> customersLine)
         {
             CustomersLine = customersLine;
         }
@@ -23,7 +23,7 @@ namespace MamaSuper.Logic.Services
         /// <summary>
         /// <inheritdoc cref="ILineService.CustomersLine"/>
         /// </summary>
-        public Line<Customer> CustomersLine { get; }
+        public SupermarketLine<Customer> CustomersLine { get; }
 
         /// <summary>
         /// <inheritdoc cref="ILineService.MoveOutCustomers"/>

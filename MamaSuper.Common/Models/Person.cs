@@ -1,7 +1,7 @@
 ﻿namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Represents a person in the system
+    /// A person in the world
     /// </summary>
     public class Person
     {
