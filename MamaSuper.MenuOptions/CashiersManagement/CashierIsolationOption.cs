@@ -26,9 +26,9 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             if (!validateUserChoice(userInput, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
-            if (!chosenCashier.IsOpen())
+            if (chosenCashier.Registers.Count == 0)
             {
-                Console.WriteLine("This cashier is not open yet!\n");
+                Console.WriteLine("No customers passed in this cashier!\n");
                 return;
             }
 
@@ -37,7 +37,11 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 customer.ShouldIsolate = true;
             }
 
-            Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) are now isolated\n");
+            chosenCashier.Worker.ShouldIsolate = true;
+            chosenCashier.IsOpen = false;
+
+            Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) and its worker " +
+                              $"({chosenCashier.Worker}) are now isolated\n");
         }
 
         private bool validateUserChoice(string userInput, out int userChoice)

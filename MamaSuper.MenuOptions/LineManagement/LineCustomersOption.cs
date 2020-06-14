@@ -28,6 +28,7 @@ namespace MamaSuper.MenuOptions.LineManagement
 
             Console.WriteLine("Current customers in line:");
             _lineService.CustomersLine.GetLineItems().ToList().ForEach(Console.WriteLine);
+            Console.WriteLine(Environment.NewLine);
         }
     }
 }

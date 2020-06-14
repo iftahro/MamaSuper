@@ -5,7 +5,7 @@
     /// </summary>
     public class Worker : Person
     {
-        public Worker(string name, int bodyTemperature, bool hasMask, bool shouldIsolate) :
+        public Worker(string name, int bodyTemperature = 37, bool hasMask = true, bool shouldIsolate = false) :
             base(name, bodyTemperature, hasMask, shouldIsolate)
         {
         }

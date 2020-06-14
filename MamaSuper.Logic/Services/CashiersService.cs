@@ -41,16 +41,17 @@ namespace MamaSuper.Logic.Services
         /// </summary>
         private Cashier getEmptiestCashier()
         {
-            for (int i = 0; i < Cashiers.Count; i++)
+            List<Cashier> availableCashiers = Cashiers.FindAll(cashier => cashier.IsOpen);
+            for (int i = 0; i < availableCashiers.Count; i++)
             {
-                if (i == Cashiers.Count - 1) break;
-                if (Cashiers[i].Registers.Count > Cashiers[i + 1].Registers.Count)
+                if (i == availableCashiers.Count - 1) break;
+                if (availableCashiers[i].Registers.Count > availableCashiers[i + 1].Registers.Count)
                 {
-                    return Cashiers[i + 1];
+                    return availableCashiers[i + 1];
                 }
             }
 
-            return Cashiers[0];
+            return availableCashiers[0];
         }
 
         /// <summary>
@@ -61,7 +62,11 @@ namespace MamaSuper.Logic.Services
         /// <param name="products">The costumer's products to buy</param>
         private void registerCustomer(Customer customer, Cashier cashier, List<Product> products)
         {
-            if (!cashier.IsOpen()) cashier.DateOpened = DateTime.Now;
+            if (cashier.Registers.Count == 0)
+            {
+                cashier.DateOpened = DateTime.Now;
+            }
+
             cashier.Registers[customer] = products;
         }
     }

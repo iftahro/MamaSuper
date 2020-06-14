@@ -27,7 +27,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];
-                if (!cashier.IsOpen())
+                if (cashier.Registers.Count == 0)
                 {
                     Console.WriteLine($"\nNo.{i + 1}: No registers yet\n");
                     continue;

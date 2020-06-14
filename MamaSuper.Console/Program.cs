@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.MenuOptions.LineManagement;
 using MamaSuper.MenuOptions.Menus;
@@ -23,7 +24,8 @@ namespace MamaSuper.Console
                 });
 
             // Supermarket cashiers and products
-            var cashiers = new List<Cashier> {new Cashier(), new Cashier(), new Cashier()};
+            var workers = new List<Worker> {new Worker("Avi"), new Worker("Eti"), new Worker("Mosh")};
+            List<Cashier> cashiers = workers.Select(worker => new Cashier(worker)).ToList();
             var products = new Dictionary<string, int> {{"Banana", 7}, {"Bread", 10}, {"Water", 8}, {"Gums", 5}};
             var cashiersService = new CashiersService(cashiers, lineService, products);
             // Cashiers management menu for the supermarket cashiers
