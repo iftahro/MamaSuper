@@ -4,6 +4,7 @@ namespace MamaSuper.Logic.ExtensionMethods
 {
     public static class PersonExtensionMethods
     {
+        // Max body temperature allowed by coronavirus instructions
         private const int MAX_BODY_TEMPERATURE = 38;
 
         /// <summary>
@@ -14,7 +15,7 @@ namespace MamaSuper.Logic.ExtensionMethods
         /// <returns>Is the person permitted</returns>
         public static bool IsPermittedToEnter(this Person person, out string prohibitionReason)
         {
-            bool isPermitted = true;
+            var isPermitted = true;
             prohibitionReason = string.Empty;
 
             if (person.BodyTemperature > MAX_BODY_TEMPERATURE)

@@ -9,16 +9,16 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// <summary>
     /// Adds new customers to the supermarket line 
     /// </summary>
-    public class CustomerAdderOption : IMenuOption
+    public class LineAdderOption : IMenuOption
     {
-        private readonly ICustomersLineService _customersLineService;
+        private readonly ILineService _lineService;
 
-        public CustomerAdderOption(ICustomersLineService customersLineService)
+        public LineAdderOption(ILineService lineService)
         {
-            _customersLineService = customersLineService;
+            _lineService = lineService;
         }
 
-        public string Description { get; } = "Add new customer to the line";
+        public string Description { get; } = "Add a new customer to the line";
 
         public void Action()
         {
@@ -35,13 +35,14 @@ namespace MamaSuper.MenuOptions.LineManagement
             if (!shouldIsolateInput.TryParseToBool(out bool shouldIsolate)) return;
 
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
-            if (!_customersLineService.TryAddCustomer(customer, out string failingMessage))
+            if (!customer.IsPermittedToEnter(out string failingMessage))
             {
                 Console.WriteLine(
                     $"\nFailed adding customer '{customerName}' to line. Failing reason:\n{failingMessage}\n");
                 return;
             }
 
+            _lineService.CustomersLine.AddLineItem(customer);
             Console.WriteLine($"Added customer '{customer}' to the line!\n");
         }
     }

@@ -3,13 +3,13 @@
 namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Generic queue-based line 
+    /// Generic queue-based supermarket line 
     /// </summary>
-    public class Line<T>
+    public class SupermarketLine<T>
     {
         private readonly Queue<T> _queue;
 
-        public Line(Queue<T> queue = null)
+        public SupermarketLine(Queue<T> queue = null)
         {
             _queue = queue ?? new Queue<T>();
         }

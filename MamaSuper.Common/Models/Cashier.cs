@@ -4,34 +4,34 @@ using System.Collections.Generic;
 namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Represents a cashier's in the MamaSuper
+    /// Represents a cashier's in the supermarket
     /// </summary>
     public class Cashier
     {
+        public Cashier(Dictionary<Customer, List<Product>> registers = null, DateTime dateOpened = default)
+        {
+            Registers = registers ?? new Dictionary<Customer, List<Product>>();
+            DateOpened = dateOpened;
+        }
+
         /// <summary>
-        /// Customers who passed in the cashier
+        /// The cashier registers (customers and their bargains)
         /// </summary>
-        public List<Customer> PassedCustomers { get; set; }
+        public Dictionary<Customer, List<Product>> Registers { get; }
 
         /// <summary>
         /// The date on which the cashier opened
         /// </summary>
         public DateTime DateOpened { get; set; }
 
-        public Cashier(List<Customer> passedCustomers = null, DateTime dateOpened = default)
-        {
-            PassedCustomers = passedCustomers ?? new List<Customer>();
-            DateOpened = dateOpened;
-        }
-
         public bool IsOpen()
         {
-            return PassedCustomers.Count > 0;
+            return Registers.Count > 0;
         }
 
         public override string ToString()
         {
-            return string.Join(",", PassedCustomers);
+            return string.Join(",", Registers.Keys);
         }
     }
 }

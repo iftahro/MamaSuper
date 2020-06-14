@@ -2,34 +2,38 @@
 using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.Logic.Services
 {
+    /// <summary>
+    /// <inheritdoc cref="ICashiersService"/>
+    /// </summary>
     public class CashiersService : ICashiersService
     {
-        public CashiersService(List<Cashier> cashiers, ICustomersLineService customersLineService)
+        private readonly Dictionary<string, int> _supermarketProducts;
+
+        public CashiersService(List<Cashier> cashiers, ILineService lineService, 
+            Dictionary<string, int> supermarketProducts)
         {
             Cashiers = cashiers;
-            customersLineService.CustomerMovedOut += onCustomerEnters;
-        }
-
-        public List<Cashier> Cashiers { get; set; }
-
-        public IEnumerable<Cashier> GetAllCashiers()
-        {
-            foreach (Cashier cashier in Cashiers)
-            {
-                yield return cashier;
-            }
+            _supermarketProducts = supermarketProducts;
+            lineService.CustomerMovedOut += OnCustomerEnters;
         }
 
         /// <summary>
-        /// This method is called when a customer enters into the supermarket
+        /// <inheritdoc cref="ICashiersService.Cashiers"/>
         /// </summary>
-        private void onCustomerEnters(object sender, Customer customer)
+        public List<Cashier> Cashiers { get; }
+
+        /// <summary>
+        /// <inheritdoc cref="ICashiersService.OnCustomerEnters"/>
+        /// </summary>
+        public void OnCustomerEnters(object sender, Customer customer)
         {
             Cashier emptiestCashier = getEmptiestCashier();
-            registerOnCashier(customer, emptiestCashier);
+            List<Product> randomProducts = ProductUtils.GenerateRandomProducts(_supermarketProducts);
+            registerCustomer(customer, emptiestCashier, randomProducts);
         }
 
         /// <summary>
@@ -40,7 +44,7 @@ namespace MamaSuper.Logic.Services
             for (int i = 0; i < Cashiers.Count; i++)
             {
                 if (i == Cashiers.Count - 1) break;
-                if (Cashiers[i].PassedCustomers.Count > Cashiers[i + 1].PassedCustomers.Count)
+                if (Cashiers[i].Registers.Count > Cashiers[i + 1].Registers.Count)
                 {
                     return Cashiers[i + 1];
                 }
@@ -50,18 +54,15 @@ namespace MamaSuper.Logic.Services
         }
 
         /// <summary>
-        /// Customer registration in a cashier 
+        /// Registers customer in a cashier 
         /// </summary>
-        /// <param name="customer">The customer who registered</param>
-        /// <param name="cashier">The cashier to be registered</param>
-        private void registerOnCashier(Customer customer, Cashier cashier)
+        /// <param name="customer">The customer who registers</param>
+        /// <param name="cashier">The cashier to be registered in</param>
+        /// <param name="products">The costumer's products to buy</param>
+        private void registerCustomer(Customer customer, Cashier cashier, List<Product> products)
         {
-            if (!cashier.IsOpen())
-            {
-                cashier.DateOpened = DateTime.Now;
-            }
-
-            cashier.PassedCustomers.Add(customer);
+            if (!cashier.IsOpen()) cashier.DateOpened = DateTime.Now;
+            cashier.Registers[customer] = products;
         }
     }
 }

@@ -13,25 +13,26 @@ namespace MamaSuper.Console
         static void Main(string[] args)
         {
             // Line management menu for the supermarket customers line
-            ICustomersLineService customersLineService = new CustomersLineService(new Line<Customer>());
+            ILineService lineService = new LineService(new SupermarketLine<Customer>());
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
-                    new CustomerAdderOption(customersLineService),
-                    new CustomersMoverOption(customersLineService),
-                    new LineDetailsOption(customersLineService)
+                    new LineAdderOption(lineService),
+                    new LineMoverOption(lineService),
+                    new LineCustomersOption(lineService)
                 });
 
+            // Supermarket cashiers and products
+            var cashiers = new List<Cashier> {new Cashier(), new Cashier(), new Cashier()};
+            var products = new Dictionary<string, int> {{"Banana", 7}, {"Bread", 10}, {"Water", 8}, {"Gums", 5}};
+            var cashiersService = new CashiersService(cashiers, lineService, products);
             // Cashiers management menu for the supermarket cashiers
-            var cashiersService = new CashiersService(new List<Cashier>
-                {new Cashier(), new Cashier(), new Cashier()}, customersLineService);
-            var passedCustomersOption = new PassedCustomersOption(cashiersService);
             var cashiersManagementMenu = new NumericMenu("Cashiers Management Menu",
                 new List<IMenuOption>
                 {
-                    passedCustomersOption,
-                    new OpeningDateOption(cashiersService),
-                    new CashierIsolationOption(cashiersService, passedCustomersOption)
+                    new CashiersRegistersOption(cashiersService),
+                    new CashiersOpeningDateOption(cashiersService),
+                    new CashierIsolationOption(cashiersService)
                 });
 
             // The main menu that contains all the management menus

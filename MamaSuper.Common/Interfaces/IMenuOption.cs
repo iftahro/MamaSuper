@@ -1,7 +1,7 @@
 ﻿namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
-    /// Represents an option in a menu
+    /// An option in a menu
     /// </summary>
     public interface IMenuOption
     {

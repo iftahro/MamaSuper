@@ -7,27 +7,27 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// <summary>
     /// Prints the line details (current customers in line)
     /// </summary>
-    public class LineDetailsOption : IMenuOption
+    public class LineCustomersOption : IMenuOption
     {
-        private readonly ICustomersLineService _customersLineService;
+        private readonly ILineService _lineService;
 
-        public LineDetailsOption(ICustomersLineService customersLineService)
+        public LineCustomersOption(ILineService lineService)
         {
-            _customersLineService = customersLineService;
+            _lineService = lineService;
         }
 
         public string Description { get; } = "Print all customers in line";
 
         public void Action()
         {
-            if (_customersLineService.CountLineCustomers() == 0)
+            if (_lineService.CustomersLine.CountLineItems() == 0)
             {
                 Console.WriteLine("There are no customers in line\n");
                 return;
             }
 
             Console.WriteLine("Current customers in line:");
-            _customersLineService.GetLineCustomers().ToList().ForEach(Console.WriteLine);
+            _lineService.CustomersLine.GetLineItems().ToList().ForEach(Console.WriteLine);
         }
     }
 }
