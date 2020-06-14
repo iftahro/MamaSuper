@@ -18,7 +18,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             _lineService = lineService;
         }
 
-        public string Description { get; } = "Add new customer to the line";
+        public string Description { get; } = "Add a new customer to the line";
 
         public void Action()
         {

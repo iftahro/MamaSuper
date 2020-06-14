@@ -19,20 +19,20 @@ namespace MamaSuper.Console
                 {
                     new LineAdderOption(lineService),
                     new LineMoverOption(lineService),
-                    new LineDetailsOption(lineService)
+                    new LineCustomersOption(lineService)
                 });
 
             // Supermarket cashiers and products
             var cashiers = new List<Cashier> {new Cashier(), new Cashier(), new Cashier()};
-            var products = new Dictionary<string, int>{ { "Banana", 7 }, { "Bread", 10 }, { "Water", 8 }, { "Gums", 5 }};
+            var products = new Dictionary<string, int> {{"Banana", 7}, {"Bread", 10}, {"Water", 8}, {"Gums", 5}};
             var cashiersService = new CashiersService(cashiers, lineService, products);
             // Cashiers management menu for the supermarket cashiers
             var cashiersManagementMenu = new NumericMenu("Cashiers Management Menu",
                 new List<IMenuOption>
                 {
-                    new RegistersOption(cashiersService),
-                    new OpeningDateOption(cashiersService),
-                    new IsolationOption(cashiersService)
+                    new CashierRegistersOption(cashiersService),
+                    new CashierOpeningDateOption(cashiersService),
+                    new CashierIsolationOption(cashiersService)
                 });
 
             // The main menu that contains all the management menus

@@ -9,16 +9,16 @@ namespace MamaSuper.MenuOptions.CashiersManagement
     /// <summary>
     /// Prints all the supermarket cashiers opening dates
     /// </summary>
-    public class OpeningDateOption : IMenuOption
+    public class CashierOpeningDateOption : IMenuOption
     {
         private readonly ICashiersService _cashiersService;
 
-        public OpeningDateOption(ICashiersService cashiersService)
+        public CashierOpeningDateOption(ICashiersService cashiersService)
         {
             _cashiersService = cashiersService;
         }
 
-        public string Description { get; } = "Get cashiers opening dates";
+        public string Description { get; } = "Get all cashiers opening dates";
 
         public void Action()
         {

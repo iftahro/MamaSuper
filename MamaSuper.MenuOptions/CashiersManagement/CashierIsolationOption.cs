@@ -9,11 +9,11 @@ namespace MamaSuper.MenuOptions.CashiersManagement
     /// <summary>
     /// Isolates retrospectively all customers of a specific cashier
     /// </summary>
-    public class IsolationOption : IMenuOption
+    public class CashierIsolationOption : IMenuOption
     {
         private readonly ICashiersService _cashiersService;
 
-        public IsolationOption(ICashiersService cashiersService)
+        public CashierIsolationOption(ICashiersService cashiersService)
         {
             _cashiersService = cashiersService;
         }

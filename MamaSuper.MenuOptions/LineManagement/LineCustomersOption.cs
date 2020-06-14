@@ -7,11 +7,11 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// <summary>
     /// Prints the line details (current customers in line)
     /// </summary>
-    public class LineDetailsOption : IMenuOption
+    public class LineCustomersOption : IMenuOption
     {
         private readonly ILineService _lineService;
 
-        public LineDetailsOption(ILineService lineService)
+        public LineCustomersOption(ILineService lineService)
         {
             _lineService = lineService;
         }

@@ -10,16 +10,16 @@ namespace MamaSuper.MenuOptions.CashiersManagement
     /// <summary>
     /// Prints all the supermarket cashiers registers
     /// </summary>
-    public class RegistersOption : IMenuOption
+    public class CashierRegistersOption : IMenuOption
     {
         private readonly ICashiersService _cashiersService;
 
-        public RegistersOption(ICashiersService cashiersService)
+        public CashierRegistersOption(ICashiersService cashiersService)
         {
             _cashiersService = cashiersService;
         }
 
-        public string Description { get; } = "Get cashiers registers";
+        public string Description { get; } = "Get all cashiers registers";
 
         public void Action()
         {
