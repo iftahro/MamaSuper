@@ -12,13 +12,15 @@ namespace MamaSuper.Logic.Services
     public class CashiersService : ICashiersService
     {
         private readonly Dictionary<string, int> _supermarketProducts;
+        private readonly ILineService _lineService;
 
         public CashiersService(List<Cashier> cashiers, ILineService lineService, 
             Dictionary<string, int> supermarketProducts)
         {
             Cashiers = cashiers;
             _supermarketProducts = supermarketProducts;
-            lineService.CustomerMovedOut += OnCustomerEnters;
+            _lineService = lineService;
+            _lineService.CustomerMovedOut += OnCustomerEnters;
         }
 
         /// <summary>
@@ -32,8 +34,16 @@ namespace MamaSuper.Logic.Services
         public void OnCustomerEnters(object sender, Customer customer)
         {
             Cashier emptiestCashier = getEmptiestCashier();
+            if (emptiestCashier == null)
+            {
+                _lineService.CustomersLine.AddLineItem(customer);
+                Console.WriteLine($"No workers in the supermarket. Customer '{customer}' sent back to the line\n");
+                return;
+            }
+
             List<Product> randomProducts = ProductUtils.GenerateRandomProducts(_supermarketProducts);
             registerCustomer(customer, emptiestCashier, randomProducts);
+            Console.WriteLine($"Customer '{customer}' has registered in the cashiers successfully!\n");
         }
 
         /// <summary>
@@ -42,6 +52,8 @@ namespace MamaSuper.Logic.Services
         private Cashier getEmptiestCashier()
         {
             List<Cashier> availableCashiers = Cashiers.FindAll(cashier => cashier.IsOpen);
+            if (availableCashiers.Count == 0) return null;
+
             for (int i = 0; i < availableCashiers.Count; i++)
             {
                 if (i == availableCashiers.Count - 1) break;

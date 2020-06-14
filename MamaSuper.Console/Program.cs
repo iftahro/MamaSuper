@@ -6,6 +6,7 @@ using MamaSuper.MenuOptions.Menus;
 using MamaSuper.Common.Models;
 using MamaSuper.Logic.Services;
 using MamaSuper.MenuOptions.CashiersManagement;
+using MamaSuper.MenuOptions.WorkersManagement;
 
 namespace MamaSuper.Console
 {
@@ -36,10 +37,18 @@ namespace MamaSuper.Console
                     new CashiersOpeningDateOption(cashiersService),
                     new CashierIsolationOption(cashiersService)
                 });
+            //a
+            var workersService = new WorkersService(workers);
+            var a = new NumericMenu("Workers management", new List<IMenuOption>
+            {
+                new CheckInOption(workersService,cashiersService),
+                new CheckOutOption(workersService,cashiersService),
+                new TrafficOption(workersService)
+            });
 
             // The main menu that contains all the management menus
             var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption>
-                {lineManagementMenu, cashiersManagementMenu});
+                {lineManagementMenu, cashiersManagementMenu, a});
 
             mainMenu.Action();
         }

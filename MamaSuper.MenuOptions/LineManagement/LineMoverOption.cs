@@ -36,7 +36,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             IEnumerable<Customer> movedCostumers = _lineService.MoveOutCustomers(customersToMove);
             foreach (Customer movedCostumer in movedCostumers)
             {
-                Console.WriteLine($"\nMoved {movedCostumer} from line into the supermarket\n");
+                Console.WriteLine($"\nMoved {movedCostumer} out of customers line\n");
             }
         }
 

@@ -27,7 +27,7 @@ namespace MamaSuper.Common.Models
 
         public Worker Worker { get; set; }
 
-        public bool IsOpen { get; set; } = true;
+        public bool IsOpen { get; set; } = false;
 
         public override string ToString()
         {

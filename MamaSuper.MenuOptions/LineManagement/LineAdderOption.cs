@@ -43,7 +43,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             }
 
             _lineService.CustomersLine.AddLineItem(customer);
-            Console.WriteLine($"Added customer '{customer}' to the line!\n");
+            Console.WriteLine($"\nAdded customer '{customer}' to the line!\n");
         }
     }
 }
