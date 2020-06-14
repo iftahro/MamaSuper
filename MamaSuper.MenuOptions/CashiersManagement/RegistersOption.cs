@@ -23,7 +23,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
 
         public void Action()
         {
-            List<Cashier> cashiers = _cashiersService.GetAllCashiers().ToList();
+            List<Cashier> cashiers = _cashiersService.Cashiers.ToList();
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];
@@ -36,7 +36,8 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 Console.WriteLine($"\nCashier No.{i + 1}:");
                 foreach ((Customer customer, List<Product> products) in cashier.Registers)
                 {
-                    Console.WriteLine($"{customer}- {ProductUtils.DictionaryRepresentation(products)}");
+                    Dictionary<string, int> productsByName = ProductUtils.GroupProductsByName(products);
+                    Console.WriteLine($"{customer}- {string.Join(",", productsByName)}");
                 }
             }
         }

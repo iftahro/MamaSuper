@@ -1,10 +1,18 @@
 ﻿namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Represents a person in the MamaSuper
+    /// Represents a person in the system
     /// </summary>
     public class Person
     {
+        public Person(string name, int bodyTemperature, bool hasMask, bool shouldIsolate)
+        {
+            Name = name;
+            BodyTemperature = bodyTemperature;
+            HasMask = hasMask;
+            ShouldIsolate = shouldIsolate;
+        }
+
         /// <summary>
         /// The person's name
         /// </summary>
@@ -24,14 +32,6 @@
         /// Is the person should be isolated duo to coronavirus
         /// </summary>
         public bool ShouldIsolate { get; set; }
-
-        public Person(string name, int bodyTemperature, bool hasMask, bool shouldIsolate)
-        {
-            Name = name;
-            BodyTemperature = bodyTemperature;
-            HasMask = hasMask;
-            ShouldIsolate = shouldIsolate;
-        }
 
         public override string ToString()
         {

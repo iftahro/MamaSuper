@@ -10,20 +10,20 @@ namespace MamaSuper.MenuOptions.LineManagement
     /// <summary>
     /// Moves customers out of the supermarket line
     /// </summary>
-    public class CustomersMoverOption : IMenuOption
+    public class LineMoverOption : IMenuOption
     {
-        private readonly ICustomersLineService _customersLineService;
+        private readonly ILineService _lineService;
 
-        public CustomersMoverOption(ICustomersLineService customersLineService)
+        public LineMoverOption(ILineService lineService)
         {
-            _customersLineService = customersLineService;
+            _lineService = lineService;
         }
 
         public string Description { get; } = "Move customers into the supermarket";
 
         public void Action()
         {
-            int currentLineCount = _customersLineService.CountLineCustomers();
+            int currentLineCount = _lineService.CustomersLine.CountLineItems();
             if (currentLineCount == 0)
             {
                 Console.WriteLine("There are no customer in line!\n");
@@ -33,10 +33,10 @@ namespace MamaSuper.MenuOptions.LineManagement
             string customersToMoveInput = ConsoleUtils.GetInputAfterOutput("Enter the amount of customer to move:");
             if (!validateCustomersToMove(customersToMoveInput, currentLineCount, out int customersToMove)) return;
 
-            IEnumerable<Customer> movedCostumers = _customersLineService.MoveOutCustomers(customersToMove);
+            IEnumerable<Customer> movedCostumers = _lineService.MoveOutCustomers(customersToMove);
             foreach (Customer movedCostumer in movedCostumers)
             {
-                Console.WriteLine($"Moved {movedCostumer} from line into the supermarket\n");
+                Console.WriteLine($"\nMoved {movedCostumer} from line into the supermarket\n");
             }
         }
 

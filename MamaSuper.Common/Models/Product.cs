@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MamaSuper.Common.Models
+﻿namespace MamaSuper.Common.Models
 {
+    /// <summary>
+    /// A supermarket product
+    /// </summary>
     public class Product
     {
         public Product(string name, int price)
@@ -12,9 +11,15 @@ namespace MamaSuper.Common.Models
             Price = price;
         }
 
-        public string Name { get; set; }
+        /// <summary>
+        /// The product's name
+        /// </summary>
+        public string Name { get; }
 
-        public int Price { get; set; }
+        /// <summary>
+        /// The product's price
+        /// </summary>
+        public int Price { get; }
 
         public override string ToString()
         {

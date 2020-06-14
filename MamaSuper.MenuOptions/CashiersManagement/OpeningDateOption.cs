@@ -22,7 +22,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
 
         public void Action()
         {
-            List<Cashier> cashiers = _cashiersService.GetAllCashiers().ToList();
+            List<Cashier> cashiers = _cashiersService.Cashiers.ToList();
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];

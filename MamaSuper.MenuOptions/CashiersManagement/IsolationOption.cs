@@ -22,7 +22,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
 
         public void Action()
         {
-            string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier (1-{_cashiersService.Cashiers.Count}):");
+            string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier to isolate (1-{_cashiersService.Cashiers.Count}):");
             if (!validateUserChoice(userInput, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];

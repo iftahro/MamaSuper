@@ -4,25 +4,25 @@ using System.Collections.Generic;
 namespace MamaSuper.Common.Models
 {
     /// <summary>
-    /// Represents a cashier's in the MamaSuper
+    /// Represents a cashier's in the supermarket
     /// </summary>
     public class Cashier
     {
-        /// <summary>
-        /// Customers who passed in the cashier
-        /// </summary>
-        public Dictionary<Customer, List<Product>> Registers { get; set; }
-
-        /// <summary>
-        /// The date on which the cashier opened
-        /// </summary>
-        public DateTime DateOpened { get; set; }
-
         public Cashier(Dictionary<Customer, List<Product>> registers = null, DateTime dateOpened = default)
         {
             Registers = registers ?? new Dictionary<Customer, List<Product>>();
             DateOpened = dateOpened;
         }
+
+        /// <summary>
+        /// The cashier registers (customers and their bargains)
+        /// </summary>
+        public Dictionary<Customer, List<Product>> Registers { get; }
+
+        /// <summary>
+        /// The date on which the cashier opened
+        /// </summary>
+        public DateTime DateOpened { get; set; }
 
         public bool IsOpen()
         {
