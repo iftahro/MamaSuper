@@ -33,7 +33,7 @@ namespace MamaSuper.MenuOptions.WorkersManagement
             // Checks if worker already checked in
             if (workerCashier.IsOpen)
             {
-                Console.WriteLine($"Worker {chosenWorker} is already in the store!\n");
+                Console.WriteLine($"\nWorker {chosenWorker} is already in the store!\n");
                 return;
             }
 
