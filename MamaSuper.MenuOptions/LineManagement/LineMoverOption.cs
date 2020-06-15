@@ -28,7 +28,7 @@ namespace MamaSuper.MenuOptions.LineManagement
             }
 
             string customersToMoveInput = ConsoleUtils.GetInputAfterOutput("Enter the amount of customer to move:");
-            if (!MenuUtils.ValidateNumericMenuChoice(customersToMoveInput, 
+            if (!MenuUtils.ValidateNumericMenuChoice(customersToMoveInput,
                 currentLineCount, out int customersToMove)) return;
 
             _lineService.MoveOutCustomers(customersToMove);

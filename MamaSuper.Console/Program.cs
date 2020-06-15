@@ -17,9 +17,9 @@ namespace MamaSuper.Console
         {
             #region Supermarket objects
 
-            var workers = new List<Worker> { new Worker("Avi"), new Worker("Eti"), new Worker("Mosh") };
+            var workers = new List<Worker> {new Worker("Avi"), new Worker("Eti"), new Worker("Mosh")};
             List<Cashier> cashiers = workers.Select(worker => new Cashier(worker)).ToList();
-            var products = new Dictionary<string, int> { { "Banana", 7 }, { "Bread", 10 }, { "Water", 8 }, { "Gums", 5 } };
+            var products = new Dictionary<string, int> {{"Banana", 7}, {"Bread", 10}, {"Water", 8}, {"Gums", 5}};
 
             #endregion
 
@@ -69,7 +69,7 @@ namespace MamaSuper.Console
             }
             catch (Exception e)
             {
-                System.Console.WriteLine($"MamaSuper process has failed! Failing message:\n{e.Message}");
+                System.Console.WriteLine($"MamaSuper process has failed! Failure message:\n{e.Message}");
             }
         }
     }

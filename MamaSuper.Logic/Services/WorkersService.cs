@@ -47,6 +47,5 @@ namespace MamaSuper.Logic.Services
         {
             return _cashiersService.Cashiers.Find(cashier => cashier.Worker == worker);
         }
-
     }
 }

@@ -12,7 +12,7 @@ namespace MamaSuper.Common.Interfaces
         /// <summary>
         /// All supermarket workers
         /// </summary>
-        public List<Worker> Workers { get; set; }
+        List<Worker> Workers { get; set; }
 
         /// <summary>
         /// Every worker start of the working day

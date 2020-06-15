@@ -15,7 +15,8 @@ namespace MamaSuper.Logic.Utils
         /// <param name="supermarketProducts">The product properties dict</param>
         /// <param name="maxProducts">The max products to generate</param>
         /// <returns>The random products</returns>
-        public static List<Product> GenerateRandomProducts(Dictionary<string, int> supermarketProducts, int maxProducts = 5)
+        public static List<Product> GenerateRandomProducts(Dictionary<string, int> supermarketProducts,
+            int maxProducts = 5)
         {
             var randomProducts = new List<Product>();
             // The amount of products to generate

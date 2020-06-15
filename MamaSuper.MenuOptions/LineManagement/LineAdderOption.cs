@@ -36,7 +36,11 @@ namespace MamaSuper.MenuOptions.LineManagement
 
             string moneyInput = ConsoleUtils.GetInputAfterOutput($"Enter {customerName} money amount ($):");
             if (!moneyInput.TryParseToInt(out int customerMoney)) return;
-            if (customerMoney < 0) {Console.WriteLine($"{customerMoney} is not a valid money amount");return;}
+            if (customerMoney < 0)
+            {
+                Console.WriteLine($"{customerMoney} is not a valid money amount");
+                return;
+            }
 
             var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate, customerMoney);
             if (!customer.IsPermittedToEnter(out string failingMessage))

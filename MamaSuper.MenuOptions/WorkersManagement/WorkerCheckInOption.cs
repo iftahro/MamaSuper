@@ -26,9 +26,10 @@ namespace MamaSuper.MenuOptions.WorkersManagement
             Console.WriteLine("Workers:");
             MenuUtils.PrintListAscending(_workersService.Workers);
             string userInput = ConsoleUtils.GetInputAfterOutput("Enter your number:");
-            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)) return;
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)
+            ) return;
 
-            Worker chosenWorker =  _workersService.Workers[userChoice - 1];
+            Worker chosenWorker = _workersService.Workers[userChoice - 1];
             Cashier workerCashier = _workersService.GetCashierByWorker(chosenWorker);
             // Checks if worker already checked in
             if (workerCashier.IsOpen)
@@ -48,7 +49,8 @@ namespace MamaSuper.MenuOptions.WorkersManagement
                 ConsoleUtils.GetInputAfterOutput("Do you should be isolated? (true/false)");
             if (!shouldIsolateInput.TryParseToBool(out bool shouldIsolate)) return;
 
-            if (!validateWorkerPermission(chosenWorker, bodyTemperature, maskOn, shouldIsolate, out string prohibitionReason))
+            if (!validateWorkerPermission(chosenWorker, bodyTemperature, maskOn, shouldIsolate,
+                out string prohibitionReason))
             {
                 Console.WriteLine(
                     $"\nYou are ejected from the store and getting fined by 40$!. Ejecting reason:\n{prohibitionReason}\n");
@@ -61,7 +63,7 @@ namespace MamaSuper.MenuOptions.WorkersManagement
             _workersService.CheckIns[chosenWorker] = DateTime.Now;
             _workersService.CheckOuts[chosenWorker] = null;
             Console.WriteLine($"\nWelcome back, {chosenWorker}!\n");
-            
+
             if (chosenWorker.Fine > 0)
             {
                 Console.WriteLine($"Today you need to work extra {chosenWorker.Fine / 30} hours!\n");
