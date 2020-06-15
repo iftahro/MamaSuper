@@ -14,8 +14,24 @@ namespace MamaSuper.Console
     {
         static void Main(string[] args)
         {
-            // Line management menu for the supermarket customers line
-            ILineService lineService = new LineService(new SupermarketLine<Customer>());
+            #region Supermarket objects
+
+            var workers = new List<Worker> { new Worker("Avi"), new Worker("Eti"), new Worker("Mosh") };
+            List<Cashier> cashiers = workers.Select(worker => new Cashier(worker)).ToList();
+            var products = new Dictionary<string, int> { { "Banana", 7 }, { "Bread", 10 }, { "Water", 8 }, { "Gums", 5 } };
+
+            #endregion
+
+            #region Services
+
+            var lineService = new LineService(new SupermarketLine<Customer>());
+            var cashiersService = new CashiersService(cashiers, lineService, products);
+            var workersService = new WorkersService(workers, cashiersService);
+
+            #endregion
+
+            #region Management Menus
+
             var lineManagementMenu = new NumericMenu("Line Management Menu",
                 new List<IMenuOption>
                 {
@@ -24,12 +40,6 @@ namespace MamaSuper.Console
                     new LineCustomersOption(lineService)
                 });
 
-            // Supermarket cashiers and products
-            var workers = new List<Worker> {new Worker("Avi"), new Worker("Eti"), new Worker("Mosh")};
-            List<Cashier> cashiers = workers.Select(worker => new Cashier(worker)).ToList();
-            var products = new Dictionary<string, int> {{"Banana", 7}, {"Bread", 10}, {"Water", 8}, {"Gums", 5}};
-            var cashiersService = new CashiersService(cashiers, lineService, products);
-            // Cashiers management menu for the supermarket cashiers
             var cashiersManagementMenu = new NumericMenu("Cashiers Management Menu",
                 new List<IMenuOption>
                 {
@@ -37,18 +47,20 @@ namespace MamaSuper.Console
                     new CashiersOpeningDateOption(cashiersService),
                     new CashierIsolationOption(cashiersService)
                 });
-            //a
-            var workersService = new WorkersService(workers);
-            var a = new NumericMenu("Workers management", new List<IMenuOption>
-            {
-                new CheckInOption(workersService,cashiersService),
-                new CheckOutOption(workersService,cashiersService),
-                new TrafficOption(workersService)
-            });
+
+            var workersManagementMenu = new NumericMenu("Workers Management Menu",
+                new List<IMenuOption>
+                {
+                    new WorkerCheckInOption(workersService),
+                    new WorkerCheckOutOption(workersService),
+                    new WorkersRegistersOption(workersService)
+                });
+
+            #endregion
 
             // The main menu that contains all the management menus
             var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption>
-                {lineManagementMenu, cashiersManagementMenu, a});
+                {lineManagementMenu, cashiersManagementMenu, workersManagementMenu});
 
             mainMenu.Action();
         }

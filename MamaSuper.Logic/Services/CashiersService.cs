@@ -14,8 +14,7 @@ namespace MamaSuper.Logic.Services
         private readonly Dictionary<string, int> _supermarketProducts;
         private readonly ILineService _lineService;
 
-        public CashiersService(List<Cashier> cashiers, ILineService lineService, 
-            Dictionary<string, int> supermarketProducts)
+        public CashiersService(List<Cashier> cashiers, ILineService lineService, Dictionary<string, int> supermarketProducts)
         {
             Cashiers = cashiers;
             _supermarketProducts = supermarketProducts;
@@ -33,53 +32,37 @@ namespace MamaSuper.Logic.Services
         /// </summary>
         public void OnCustomerEnters(object sender, Customer customer)
         {
-            Cashier emptiestCashier = getEmptiestCashier();
-            if (emptiestCashier == null)
+            Cashier cashier = getEmptiestOpenCashier();
+            if (cashier == null)
             {
                 _lineService.CustomersLine.AddLineItem(customer);
-                Console.WriteLine($"No workers in the supermarket. Customer '{customer}' sent back to the line\n");
+                Console.WriteLine($"The supermarket is close (no workers). Customer '{customer}' sent back to the line\n");
                 return;
             }
 
             List<Product> randomProducts = ProductUtils.GenerateRandomProducts(_supermarketProducts);
-            registerCustomer(customer, emptiestCashier, randomProducts);
-            Console.WriteLine($"Customer '{customer}' has registered in the cashiers successfully!\n");
+            cashier.Registers[customer] = randomProducts;
+            Console.WriteLine($"Customer '{customer}' has entered to the supermarket\n");
         }
 
         /// <summary>
-        /// Returns the emptiest supermarket cashier
+        /// Returns the emptiest open supermarket cashier
         /// </summary>
-        private Cashier getEmptiestCashier()
+        private Cashier getEmptiestOpenCashier()
         {
-            List<Cashier> availableCashiers = Cashiers.FindAll(cashier => cashier.IsOpen);
-            if (availableCashiers.Count == 0) return null;
+            List<Cashier> openCashiers = Cashiers.FindAll(cashier => cashier.IsOpen);
+            if (openCashiers.Count == 0) return null;
 
-            for (int i = 0; i < availableCashiers.Count; i++)
+            for (int i = 0; i < openCashiers.Count; i++)
             {
-                if (i == availableCashiers.Count - 1) break;
-                if (availableCashiers[i].Registers.Count > availableCashiers[i + 1].Registers.Count)
+                if (i == openCashiers.Count - 1) break;
+                if (openCashiers[i].Registers.Count > openCashiers[i + 1].Registers.Count)
                 {
-                    return availableCashiers[i + 1];
+                    return openCashiers[i + 1];
                 }
             }
 
-            return availableCashiers[0];
-        }
-
-        /// <summary>
-        /// Registers customer in a cashier 
-        /// </summary>
-        /// <param name="customer">The customer who registers</param>
-        /// <param name="cashier">The cashier to be registered in</param>
-        /// <param name="products">The costumer's products to buy</param>
-        private void registerCustomer(Customer customer, Cashier cashier, List<Product> products)
-        {
-            if (cashier.Registers.Count == 0)
-            {
-                cashier.DateOpened = DateTime.Now;
-            }
-
-            cashier.Registers[customer] = products;
+            return openCashiers[0];
         }
     }
 }

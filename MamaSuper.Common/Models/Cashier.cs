@@ -8,7 +8,7 @@ namespace MamaSuper.Common.Models
     /// </summary>
     public class Cashier
     {
-        public Cashier(Worker worker, Dictionary<Customer, List<Product>> registers = null, DateTime dateOpened = default)
+        public Cashier(Worker worker, Dictionary<Customer, List<Product>> registers = null, DateTime? dateOpened = null)
         {
             Registers = registers ?? new Dictionary<Customer, List<Product>>();
             Worker = worker;
@@ -23,7 +23,7 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// The date on which the cashier opened
         /// </summary>
-        public DateTime DateOpened { get; set; }
+        public DateTime? DateOpened { get; set; }
 
         public Worker Worker { get; set; }
 

@@ -21,12 +21,12 @@
         /// <summary>
         /// The person's body temperature in c° degree 
         /// </summary>
-        public int BodyTemperature { get; }
+        public int BodyTemperature { get; set; }
 
         /// <summary>
         /// Is the person wear mask
         /// </summary>
-        public bool HasMask { get; }
+        public bool HasMask { get; set; }
 
         /// <summary>
         /// Is the person should be isolated duo to coronavirus

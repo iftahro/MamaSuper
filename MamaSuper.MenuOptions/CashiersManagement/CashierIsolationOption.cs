@@ -23,12 +23,12 @@ namespace MamaSuper.MenuOptions.CashiersManagement
         public void Action()
         {
             string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier to isolate (1-{_cashiersService.Cashiers.Count}):");
-            if (!validateUserChoice(userInput, out int userChoice)) return;
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _cashiersService.Cashiers.Count, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
             if (chosenCashier.Registers.Count == 0)
             {
-                Console.WriteLine("No customers passed in this cashier!\n");
+                Console.WriteLine("No customers passed in this cashier yet!\n");
                 return;
             }
 
@@ -42,19 +42,6 @@ namespace MamaSuper.MenuOptions.CashiersManagement
 
             Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) and its worker " +
                               $"({chosenCashier.Worker}) are now isolated\n");
-        }
-
-        private bool validateUserChoice(string userInput, out int userChoice)
-        {
-            if (!userInput.TryParseToInt(out userChoice)) return false;
-
-            if (userChoice <= 0 || userChoice > _cashiersService.Cashiers.Count)
-            {
-                Console.WriteLine($"'{userChoice}' is not in cashiers range!\n");
-                return false;
-            }
-
-            return true;
         }
     }
 }

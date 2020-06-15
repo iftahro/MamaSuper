@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Logic.ExtensionMethods;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.Menus
 {
@@ -51,16 +52,11 @@ namespace MamaSuper.MenuOptions.Menus
         /// </summary>
         private void handleUserInput()
         {
-            string userInput = Console.ReadLine();
-            Console.WriteLine();
-            if (!userInput.TryParseToInt(out int userChoice)) return;
+            string userInput = ConsoleUtils.GetInputAfterOutput("Enter your choice:");
+            Console.Clear();
 
             int maxOptions = _menuOptions.Count + 1;
-            if (userChoice > maxOptions || userChoice <= 0)
-            {
-                Console.WriteLine($"{userChoice} is out of choice range!\nTry again..\n");
-                return;
-            }
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, maxOptions, out int userChoice)) return;
 
             // Checks if the user choice is the last menu option (the exit option)
             if (userChoice == maxOptions)

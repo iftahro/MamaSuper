@@ -34,7 +34,10 @@ namespace MamaSuper.MenuOptions.LineManagement
                 ConsoleUtils.GetInputAfterOutput($"Does {customerName} should be isolated? (true/false)");
             if (!shouldIsolateInput.TryParseToBool(out bool shouldIsolate)) return;
 
-            var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate);
+            string moneyInput = ConsoleUtils.GetInputAfterOutput($"Enter {customerName} amount of money (dollars $):");
+            if (!moneyInput.TryParseToInt(out int customerMoney)) return;
+
+            var customer = new Customer(customerName, bodyTemperature, maskOn, shouldIsolate, customerMoney);
             if (!customer.IsPermittedToEnter(out string failingMessage))
             {
                 Console.WriteLine(

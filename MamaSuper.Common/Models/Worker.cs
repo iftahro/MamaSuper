@@ -9,5 +9,10 @@
             base(name, bodyTemperature, hasMask, shouldIsolate)
         {
         }
+
+        /// <summary>
+        /// Worker money fine
+        /// </summary>
+        public int Fine { get; set; } = 0;
     }
 }
