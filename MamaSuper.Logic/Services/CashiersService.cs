@@ -14,7 +14,8 @@ namespace MamaSuper.Logic.Services
         private readonly Dictionary<string, int> _supermarketProducts;
         private readonly ILineService _lineService;
 
-        public CashiersService(List<Cashier> cashiers, ILineService lineService, Dictionary<string, int> supermarketProducts)
+        public CashiersService(List<Cashier> cashiers, ILineService lineService,
+            Dictionary<string, int> supermarketProducts)
         {
             Cashiers = cashiers;
             _supermarketProducts = supermarketProducts;

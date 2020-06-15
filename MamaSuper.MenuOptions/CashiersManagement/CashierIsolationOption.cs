@@ -21,8 +21,10 @@ namespace MamaSuper.MenuOptions.CashiersManagement
 
         public void Action()
         {
-            string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier to isolate (1-{_cashiersService.Cashiers.Count}):");
-            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _cashiersService.Cashiers.Count, out int userChoice)) return;
+            string userInput =
+                ConsoleUtils.GetInputAfterOutput($"Choose a cashier to isolate (1-{_cashiersService.Cashiers.Count}):");
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _cashiersService.Cashiers.Count, out int userChoice)
+            ) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
             if (chosenCashier.Registers.Count == 0)
@@ -37,7 +39,7 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 return;
             }
 
-            foreach (Customer customer in chosenCashier.Registers.Keys) 
+            foreach (Customer customer in chosenCashier.Registers.Keys)
                 customer.ShouldIsolate = true;
 
             chosenCashier.Worker.ShouldIsolate = true;

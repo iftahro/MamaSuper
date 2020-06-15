@@ -25,7 +25,8 @@ namespace MamaSuper.MenuOptions.WorkersManagement
             Console.WriteLine("Workers:");
             MenuUtils.PrintListAscending(_workersService.Workers);
             string userInput = ConsoleUtils.GetInputAfterOutput("Enter your number:");
-            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)) return;
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)
+            ) return;
 
             Worker chosenWorker = _workersService.Workers[userChoice - 1];
             Cashier workerCashier = _workersService.GetCashierByWorker(chosenWorker);
