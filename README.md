@@ -3,4 +3,5 @@ Menu-based console app for supermarket managementing, guided by the COVID-19 ins
 
 The app supports:
 * Costumers line management
-* Cashiers management
+* Cashiers registers
+* Workers administration
