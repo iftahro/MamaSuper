@@ -31,10 +31,10 @@ namespace MamaSuper.Logic.Utils
         }
 
         /// <summary>
-        /// Groups a products list by their names
+        /// Groups a products list by their name property
         /// </summary>
         /// <param name="products">The <see cref="Product"/> list</param>
-        /// <returns>Dictionary of product names and appearances</returns>
+        /// <returns>Dictionary of product names and their list appearances</returns>
         public static Dictionary<string, int> GroupProductsByName(List<Product> products)
         {
             var productNameGroups = products.GroupBy(product => product.Name);

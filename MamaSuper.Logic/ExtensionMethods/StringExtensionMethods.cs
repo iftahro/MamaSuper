@@ -5,7 +5,7 @@ namespace MamaSuper.Logic.ExtensionMethods
     public static class StringExtensionMethods
     {
         /// <summary>
-        /// Tries parsing string to an integer
+        /// Tries parsing a string into an integer
         /// </summary>
         /// <param name="input">The string to be parsed</param>
         /// <param name="result">The int object if succeeded</param>
@@ -19,7 +19,7 @@ namespace MamaSuper.Logic.ExtensionMethods
         }
 
         /// <summary>
-        /// Tries parsing string to a boolean
+        /// Tries parsing a string into a boolean
         /// </summary>
         /// <param name="input">The string to be parsed</param>
         /// <param name="result">The bool object if succeeded</param>

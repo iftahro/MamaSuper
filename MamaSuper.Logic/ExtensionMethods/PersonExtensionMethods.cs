@@ -4,7 +4,7 @@ namespace MamaSuper.Logic.ExtensionMethods
 {
     public static class PersonExtensionMethods
     {
-        // Max body temperature allowed by coronavirus instructions
+        // Max body temperature allowed by the coronavirus instructions
         private const int MAX_BODY_TEMPERATURE = 38;
 
         /// <summary>
@@ -26,13 +26,13 @@ namespace MamaSuper.Logic.ExtensionMethods
 
             if (!person.HasMask)
             {
-                prohibitionReason += "Person mask is missing. ";
+                prohibitionReason += "Mask is missing. ";
                 isPermitted = false;
             }
 
             if (person.ShouldIsolate)
             {
-                prohibitionReason += "Person should be isolated. ";
+                prohibitionReason += "Should be isolated. ";
                 isPermitted = false;
             }
 

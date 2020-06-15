@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using MamaSuper.Common.Interfaces;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.LineManagement
 {
@@ -27,7 +28,8 @@ namespace MamaSuper.MenuOptions.LineManagement
             }
 
             Console.WriteLine("Current customers in line:");
-            _lineService.CustomersLine.GetLineItems().ToList().ForEach(Console.WriteLine);
+            MenuUtils.PrintListAscending(_lineService.CustomersLine.GetLineItems().ToList());
+            Console.WriteLine();
         }
     }
 }

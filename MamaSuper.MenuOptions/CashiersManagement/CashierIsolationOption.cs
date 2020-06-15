@@ -1,7 +1,6 @@
 ﻿using System;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
-using MamaSuper.Logic.ExtensionMethods;
 using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.CashiersManagement
@@ -23,34 +22,29 @@ namespace MamaSuper.MenuOptions.CashiersManagement
         public void Action()
         {
             string userInput = ConsoleUtils.GetInputAfterOutput($"Choose a cashier to isolate (1-{_cashiersService.Cashiers.Count}):");
-            if (!validateUserChoice(userInput, out int userChoice)) return;
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _cashiersService.Cashiers.Count, out int userChoice)) return;
 
             Cashier chosenCashier = _cashiersService.Cashiers[userChoice - 1];
-            if (!chosenCashier.IsOpen())
+            if (chosenCashier.Registers.Count == 0)
             {
-                Console.WriteLine("This cashier is not open yet!\n");
+                Console.WriteLine("No customers passed in this cashier yet!\n");
                 return;
             }
 
-            foreach (Customer customer in chosenCashier.Registers.Keys)
+            if (chosenCashier.Worker.ShouldIsolate)
             {
+                Console.WriteLine("Already isolated this cashier!");
+                return;
+            }
+
+            foreach (Customer customer in chosenCashier.Registers.Keys) 
                 customer.ShouldIsolate = true;
-            }
 
-            Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) are now isolated\n");
-        }
+            chosenCashier.Worker.ShouldIsolate = true;
+            chosenCashier.IsOpen = false;
 
-        private bool validateUserChoice(string userInput, out int userChoice)
-        {
-            if (!userInput.TryParseToInt(out userChoice)) return false;
-
-            if (userChoice <= 0 || userChoice > _cashiersService.Cashiers.Count)
-            {
-                Console.WriteLine($"'{userChoice}' is not in cashiers range!\n");
-                return false;
-            }
-
-            return true;
+            Console.WriteLine($"Cashier No.{userChoice} customers ({chosenCashier}) and its worker " +
+                              $"({chosenCashier.Worker}) are now isolated\n");
         }
     }
 }

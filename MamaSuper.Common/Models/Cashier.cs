@@ -8,9 +8,10 @@ namespace MamaSuper.Common.Models
     /// </summary>
     public class Cashier
     {
-        public Cashier(Dictionary<Customer, List<Product>> registers = null, DateTime dateOpened = default)
+        public Cashier(Worker worker, Dictionary<Customer, List<Product>> registers = null, DateTime? dateOpened = null)
         {
             Registers = registers ?? new Dictionary<Customer, List<Product>>();
+            Worker = worker;
             DateOpened = dateOpened;
         }
 
@@ -22,12 +23,17 @@ namespace MamaSuper.Common.Models
         /// <summary>
         /// The date on which the cashier opened
         /// </summary>
-        public DateTime DateOpened { get; set; }
+        public DateTime? DateOpened { get; set; }
 
-        public bool IsOpen()
-        {
-            return Registers.Count > 0;
-        }
+        /// <summary>
+        /// The cashier's worker
+        /// </summary>
+        public Worker Worker { get; set; }
+
+        /// <summary>
+        /// Is the cashier open
+        /// </summary>
+        public bool IsOpen { get; set; } = false;
 
         public override string ToString()
         {

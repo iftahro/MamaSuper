@@ -26,13 +26,13 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];
-                if (cashier.DateOpened == default)
+                if (cashier.DateOpened == null)
                 {
-                    Console.WriteLine($"No.{i + 1}: has not yet opened\n");
+                    Console.WriteLine($"Cashier No.{i + 1}: has not yet opened\n");
                     continue;
                 }
 
-                Console.WriteLine($"No.{i + 1}: {cashier.DateOpened}\n");
+                Console.WriteLine($"Cashier No.{i + 1}: {cashier.DateOpened}\n");
             }
         }
     }
