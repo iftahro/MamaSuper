@@ -4,7 +4,7 @@ using MamaSuper.Common.Models;
 namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
-    /// Handles the supermarket cashiers operations
+    /// Managers the supermarket cashiers
     /// </summary>
     public interface ICashiersService
     {

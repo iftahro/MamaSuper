@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using MamaSuper.Common.Models;
 
 namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
-    /// Handles the costumers line operations
+    /// Managers the costumers line
     /// </summary>
     public interface ILineService
     {
@@ -23,7 +22,6 @@ namespace MamaSuper.Common.Interfaces
         /// Moves out customers from line
         /// </summary>
         /// <param name="count">The number of customers to move out</param>
-        /// <returns>The customers that where moved out</returns>
-        IEnumerable<Customer> MoveOutCustomers(int count);
+        void MoveOutCustomers(int count);
     }
 }

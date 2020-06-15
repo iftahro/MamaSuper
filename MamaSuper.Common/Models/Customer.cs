@@ -9,7 +9,7 @@
         }
 
         /// <summary>
-        /// Customer amount of money
+        /// The customer money amount
         /// </summary>
         public int Money { get; set; }
     }

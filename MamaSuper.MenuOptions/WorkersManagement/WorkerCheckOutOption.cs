@@ -1,11 +1,12 @@
 ﻿using System;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
+using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.WorkersManagement
 {
     /// <summary>
-    /// Worker check out logic
+    /// Worker check-out at the end of working day
     /// </summary>
     public class WorkerCheckOutOption : IMenuOption
     {
@@ -20,15 +21,19 @@ namespace MamaSuper.MenuOptions.WorkersManagement
 
         public void Action()
         {
-            // Chooses a worker to check-out
-            Worker chosenWorker = _workersService.ChooseWorker();
-            if (chosenWorker == null) return;
+            // Select a worker to check-out
+            Console.WriteLine("Workers:");
+            MenuUtils.PrintListAscending(_workersService.Workers);
+            string userInput = ConsoleUtils.GetInputAfterOutput("Enter your number:");
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)) return;
 
+            Worker chosenWorker = _workersService.Workers[userChoice - 1];
             Cashier workerCashier = _workersService.GetCashierByWorker(chosenWorker);
 
+            // Checks if worker checked in yet
             if (!workerCashier.IsOpen)
             {
-                Console.WriteLine($"Worker {chosenWorker} is not in the store!\n");
+                Console.WriteLine($"\nWorker '{chosenWorker}' hasn't checked in yet!\n");
                 return;
             }
 

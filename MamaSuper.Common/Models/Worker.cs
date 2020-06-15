@@ -11,7 +11,7 @@
         }
 
         /// <summary>
-        /// Worker money fine
+        /// The worker's financial fine 
         /// </summary>
         public int Fine { get; set; } = 0;
     }

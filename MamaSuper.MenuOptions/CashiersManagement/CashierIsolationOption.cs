@@ -1,7 +1,6 @@
 ﻿using System;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.Common.Models;
-using MamaSuper.Logic.ExtensionMethods;
 using MamaSuper.Logic.Utils;
 
 namespace MamaSuper.MenuOptions.CashiersManagement
@@ -32,10 +31,14 @@ namespace MamaSuper.MenuOptions.CashiersManagement
                 return;
             }
 
-            foreach (Customer customer in chosenCashier.Registers.Keys)
+            if (chosenCashier.Worker.ShouldIsolate)
             {
-                customer.ShouldIsolate = true;
+                Console.WriteLine("Already isolated this cashier!");
+                return;
             }
+
+            foreach (Customer customer in chosenCashier.Registers.Keys) 
+                customer.ShouldIsolate = true;
 
             chosenCashier.Worker.ShouldIsolate = true;
             chosenCashier.IsOpen = false;

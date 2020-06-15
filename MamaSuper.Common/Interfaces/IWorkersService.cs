@@ -5,10 +5,15 @@ using MamaSuper.Common.Models;
 namespace MamaSuper.Common.Interfaces
 {
     /// <summary>
-    /// Handles the workers operations and registers
+    /// Managers the supermarket workers
     /// </summary>
     public interface IWorkersService
     {
+        /// <summary>
+        /// All supermarket workers
+        /// </summary>
+        public List<Worker> Workers { get; set; }
+
         /// <summary>
         /// Every worker start of the working day
         /// </summary>
@@ -18,12 +23,6 @@ namespace MamaSuper.Common.Interfaces
         /// Every worker end of the working day
         /// </summary>
         Dictionary<Worker, DateTime?> CheckOuts { get; set; }
-
-        /// <summary>
-        /// Chooses a worker from all supermarket workers
-        /// </summary>
-        /// <returns></returns>
-        Worker ChooseWorker();
 
         /// <summary>
         /// Gets a cashier by its worker

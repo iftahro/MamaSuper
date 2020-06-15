@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MamaSuper.Common.Interfaces;
 using MamaSuper.MenuOptions.LineManagement;
@@ -62,7 +63,14 @@ namespace MamaSuper.Console
             var mainMenu = new NumericMenu("Main Menu", new List<IMenuOption>
                 {lineManagementMenu, cashiersManagementMenu, workersManagementMenu});
 
-            mainMenu.Action();
+            try
+            {
+                mainMenu.Action();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine($"MamaSuper process has failed! Failing message:\n{e.Message}");
+            }
         }
     }
 }

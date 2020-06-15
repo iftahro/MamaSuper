@@ -7,7 +7,7 @@ using MamaSuper.Logic.Utils;
 namespace MamaSuper.MenuOptions.WorkersManagement
 {
     /// <summary>
-    /// Worker check-in logic
+    /// Worker check-in at the start of working day
     /// </summary>
     public class WorkerCheckInOption : IMenuOption
     {
@@ -22,11 +22,15 @@ namespace MamaSuper.MenuOptions.WorkersManagement
 
         public void Action()
         {
-            // Chooses a worker to check-in
-            Worker chosenWorker = _workersService.ChooseWorker();
-            if (chosenWorker == null) return;
+            // Select a worker to check-in
+            Console.WriteLine("Workers:");
+            MenuUtils.PrintListAscending(_workersService.Workers);
+            string userInput = ConsoleUtils.GetInputAfterOutput("Enter your number:");
+            if (!MenuUtils.ValidateNumericMenuChoice(userInput, _workersService.Workers.Count, out int userChoice)) return;
 
+            Worker chosenWorker =  _workersService.Workers[userChoice - 1];
             Cashier workerCashier = _workersService.GetCashierByWorker(chosenWorker);
+            // Checks if worker already checked in
             if (workerCashier.IsOpen)
             {
                 Console.WriteLine($"Worker {chosenWorker} is already in the store!\n");
@@ -47,17 +51,20 @@ namespace MamaSuper.MenuOptions.WorkersManagement
             if (!validateWorkerPermission(chosenWorker, bodyTemperature, maskOn, shouldIsolate, out string prohibitionReason))
             {
                 Console.WriteLine(
-                    $"\nYou are ejected and getting fined by 40$!. Ejecting reason:\n{prohibitionReason}\n");
+                    $"\nYou are ejected from the store and getting fined by 40$!. Ejecting reason:\n{prohibitionReason}\n");
                 chosenWorker.Fine += 40;
                 return;
             }
 
             openCashier(workerCashier);
+            // Updates the worker registers
             _workersService.CheckIns[chosenWorker] = DateTime.Now;
-            Console.WriteLine($"\nWelcome back, {chosenWorker}!");
+            _workersService.CheckOuts[chosenWorker] = null;
+            Console.WriteLine($"\nWelcome back, {chosenWorker}!\n");
+            
             if (chosenWorker.Fine > 0)
             {
-                Console.WriteLine($"Today you'll work extra {chosenWorker.Fine / 30} hours!\n");
+                Console.WriteLine($"Today you need to work extra {chosenWorker.Fine / 30} hours!\n");
             }
         }
 

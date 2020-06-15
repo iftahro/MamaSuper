@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using MamaSuper.Logic.ExtensionMethods;
 
 namespace MamaSuper.Logic.Utils
@@ -6,7 +7,18 @@ namespace MamaSuper.Logic.Utils
     public static class MenuUtils
     {
         /// <summary>
-        /// Validates a user menu choice
+        /// Prints a given list in ascending order
+        /// </summary>
+        public static void PrintListAscending<T>(IList<T> array)
+        {
+            for (int i = 0; i < array.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {array[i]}");
+            }
+        }
+
+        /// <summary>
+        /// Validates a user numeric menu choice
         /// </summary>
         /// <param name="userInput">The user menu choice</param>
         /// <param name="maxOptions">The choice range</param>

@@ -27,13 +27,15 @@ namespace MamaSuper.MenuOptions.CashiersManagement
             for (int i = 0; i < cashiers.Count; i++)
             {
                 Cashier cashier = cashiers[i];
+                string cashierRepresentation = $"Cashier No.{i + 1} ({cashier.Worker})";
+
                 if (cashier.Registers.Count == 0)
                 {
-                    Console.WriteLine($"\nNo.{i + 1}: No registers yet\n");
+                    Console.WriteLine($"\n{cashierRepresentation}: No registers yet\n");
                     continue;
                 }
 
-                Console.WriteLine($"\nCashier No.{i + 1}:");
+                Console.WriteLine($"\n{cashierRepresentation}:");
                 foreach ((Customer customer, List<Product> products) in cashier.Registers)
                 {
                     Dictionary<string, int> productsByName = ProductUtils.GroupProductsByName(products);

@@ -25,8 +25,14 @@ namespace MamaSuper.Common.Models
         /// </summary>
         public DateTime? DateOpened { get; set; }
 
+        /// <summary>
+        /// The cashier's worker
+        /// </summary>
         public Worker Worker { get; set; }
 
+        /// <summary>
+        /// Is the cashier open
+        /// </summary>
         public bool IsOpen { get; set; } = false;
 
         public override string ToString()

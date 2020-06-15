@@ -36,7 +36,8 @@ namespace MamaSuper.Logic.Services
             if (cashier == null)
             {
                 _lineService.CustomersLine.AddLineItem(customer);
-                Console.WriteLine($"The supermarket is close (no workers). Customer '{customer}' sent back to the line\n");
+                Console.WriteLine($"The supermarket is close (no worker has checked-in).\n" +
+                                  $" Customer '{customer}' sent back to the line.\n");
                 return;
             }
 

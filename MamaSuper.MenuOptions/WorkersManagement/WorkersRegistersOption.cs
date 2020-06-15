@@ -32,15 +32,11 @@ namespace MamaSuper.MenuOptions.WorkersManagement
         {
             foreach ((Worker worker, DateTime? date) in registers)
             {
-                Console.WriteLine($"{worker}: {normalizeDateRepresentation(date)}");
+                string normalizedDate = date != null ? date.ToString() : "None";
+                Console.WriteLine($"{worker}: {normalizedDate}");
             }
 
             Console.WriteLine();
-        }
-
-        private string normalizeDateRepresentation(DateTime? checkOut)
-        {
-            return checkOut != null ? checkOut.ToString() : "None";
         }
     }
 }
